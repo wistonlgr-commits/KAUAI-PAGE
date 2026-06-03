@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es" class="lenis lenis-smooth dark-mode" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="KAUAI Medios & Communications — Estrategia comercial, producción audiovisual y conectividad de medios." />
+  <title>KAUAI Medios & Communications</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Lenis CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.0.45/dist/lenis.css">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HOVER REVEAL IMAGE CONTAINER (GSAP)
+══════════════════════════════════════════════════════════════ -->
+<div class="hover-reveal-container" id="hoverRevealContainer" aria-hidden="true">
+  <div class="hover-reveal-inner" id="hoverRevealInner"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HEADER / NAVBAR
+══════════════════════════════════════════════════════════════ -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="#" class="logo-link" aria-label="KAUAI Inicio">
+      <span class="logo-k">K</span>
+      <div class="logo-text">
+        <span>KAUAI</span>
+        <span>MEDIOS</span>
+      </div>
+    </a>
+
+    <div class="header-right">
+      <a href="mailto:info@stotage.com" class="header-contact hide-mobile">INFO@STOTAGE.COM</a>
+      
+      <!-- Tema Oscuro / Claro Botón -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema de color">
+        <span class="theme-icon-dark">☾</span>
+        <span class="theme-icon-light">☀</span>
+      </button>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu" aria-expanded="false">
+        <span class="menu-btn-text">MENU</span>
+        <div class="menu-burger" aria-hidden="true">
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+        </div>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════════
+     FULLSCREEN OVERLAY MENU (Structured Layout)
+══════════════════════════════════════════════════════════════ -->
+<nav class="overlay-menu" id="overlayMenu" aria-hidden="true">
+  <div class="menu-bg"></div>
+  <div class="menu-content container">
+    <div class="menu-grid">
+      <ul class="menu-links" role="list">
+        <li><a href="#about" class="menu-link" data-text="01. SOBRE NOSOTROS">01. SOBRE NOSOTROS</a></li>
+        <li><a href="#expertise" class="menu-link" data-text="02. EXPERTISE">02. EXPERTISE</a></li>
+        <li><a href="#business" class="menu-link" data-text="03. MODELO">03. MODELO</a></li>
+        <li><a href="#team" class="menu-link" data-text="04. EQUIPO">04. EQUIPO</a></li>
+        <li><a href="#contact" class="menu-link" data-text="05. CONTACTO">05. CONTACTO</a></li>
+      </ul>
+      
+      <div class="menu-sidebar">
+        <div class="menu-info">
+          <p class="menu-label">CONTÁCTANOS</p>
+          <a href="mailto:info@stotage.com" class="menu-email">info@stotage.com</a>
+          <p class="menu-phone">(809) 487 4714</p>
+        </div>
+        <div class="menu-info">
+          <p class="menu-label">REDES</p>
+          <div class="menu-socials">
+            <a href="#">INSTAGRAM</a>
+            <a href="#">LINKEDIN</a>
+            <a href="#">X / TWITTER</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     MAIN CONTENT (SMOOTH SCROLL WRAPPER)
+══════════════════════════════════════════════════════════════ -->
+<main class="main-wrapper" id="smooth-wrapper">
+  <div id="smooth-content">
+
+    <!-- ██████████████████████████████████████████████████████████
+         §1 HERO SECTION
+    ████████████████████████████████████████████████████████████ -->
+    <section class="section-hero">
+      <div class="hero-bg-media" aria-hidden="true">
+        <div class="hero-glow primary"></div>
+        <div class="hero-glow secondary"></div>
+        <div class="hero-noise"></div>
+      </div>
+
+      <div class="container hero-container">
+        
+        <div class="hero-top-meta gsap-fade-up">
+          <div class="hero-badge">
+            <div class="pulsing-dot" aria-hidden="true"></div>
+            <span>AWARD WINNING PROJECTS</span>
+          </div>
+        </div>
+
+        <h1 class="hero-title gsap-title" aria-label="Convertimos contenido en oportunidades comerciales reales">
+          <div class="title-line">CONVERTIMOS</div>
+          <div class="title-line outline">CONTENIDO</div>
+          <div class="title-line">EN OPORTUNIDADES</div>
+          <div class="title-line primary-color align-right">COMERCIALES.</div>
+        </h1>
+
+        <!-- Subtitle moved below the title -->
+        <div class="hero-bottom-meta gsap-fade-up">
+          <p class="hero-meta-text">KAUAI no improvisa. Se sumerge en tu negocio.</p>
+          <p class="hero-desc">
+            Estrategia comercial, producción audiovisual y conectividad de medios para proyectos que quieren trascender.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ██████████████████████████████████████████████████████████
+         §2 GIANT MARQUEE
+    ████████████████████████████████████████████████████████████ -->
+    <section class="section-marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee1">
+        <div class="marquee-content">
+          <span>IMPACTO REAL</span> <span class="separator">/</span>
+          <span>ESTRATEGIA 360</span> <span class="separator">/</span>
+          <span class="outline">COBERTURA PREMIUM</span> <span class="separator">/</span>
+          <span>KAUAI MEDIOS</span> <span class="separator">/</span>
+        </div>
+        <div class="marquee-content">
+          <span>IMPACTO REAL</span> <span class="separator">/</span>
+          <span>ESTRATEGIA 360</span> <span class="separator">/</span>
+          <span class="outline">COBERTURA PREMIUM</span> <span class="separator">/</span>
+          <span>KAUAI MEDIOS</span> <span class="separator">/</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ██████████████████████████████████████████████████████████
+         §3 ABOUT THE STUDIO (Balanced Two-Column)
+    ████████████████████████████████████████████████████████████ -->
+    <section class="section-about gsap-section" id="about">
+      <div class="container">
+        
+        <div class="section-header gsap-fade-up">
+          <span class="label-tag">SOBRE EL ESTUDIO</span>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-col-left gsap-fade-up">
+            <h2 class="huge-text">SEAMLESS PRODUCTION,</h2>
+            <h2 class="huge-text outline">UNFORGETTABLE MOMENTS.</h2>
+          </div>
+
+          <div class="about-col-right gsap-fade-up">
+            <p class="large-desc">
+              Desarrollamos la comercialización de eventos masivos y programas de TV, elevando el valor y orgullo de la cultura dominicana. Cada proyecto es una alianza estratégica diseñada para maximizar el impacto comercial y la rentabilidad.
+            </p>
+
+            <div class="stats-row">
+              <div class="stat-item">
+                <p class="stat-num">7+</p>
+                <p class="stat-label">AÑOS DE EXP.</p>
+              </div>
+              <div class="stat-item">
+                <p class="stat-num">150</p>
+                <p class="stat-label">PROYECTOS</p>
+              </div>
+              <div class="stat-item">
+                <p class="stat-num">98%</p>
+                <p class="stat-label">SATISFACCIÓN</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ██████████████████████████████████████████████████████████
+         §4 EXPERTISE / SERVICES (Hover Reveal List)
+    ████████████████████████████████████████████████████████████ -->
+    <section class="section-expertise gsap-section" id="expertise">
+      <div class="container">
+        
+        <div class="section-header gsap-fade-up">
+          <span class="label-tag">NUESTRA EXPERIENCIA</span>
+          <h2 class="section-title">IMPULSANDO MARCAS AL ÉXITO</h2>
+        </div>
+
+        <ul class="huge-list" role="list">
+          
+          <li class="huge-list-item hover-trigger" data-color="var(--clr-primary)">
+            <div class="hli-content">
+              <h3 class="hli-title">VARIEDAD DE MEDIOS</h3>
+              <p class="hli-desc">Expertos en negociaciones para TV, Cable, Radio, Digital y Cine. Conectamos de forma efectiva con diversas audiencias.</p>
+              <div class="hli-icon">↗</div>
+            </div>
+          </li>
+
+          <li class="huge-list-item hover-trigger" data-color="var(--clr-secondary)">
+            <div class="hli-content">
+              <h3 class="hli-title">ENFOQUE ESTRATÉGICO</h3>
+              <p class="hli-desc">Cada decisión parte de un análisis profundo de tu negocio. Desarrollamos estrategias personalizadas con proyecciones garantizadas.</p>
+              <div class="hli-icon">↗</div>
+            </div>
+          </li>
+
+          <li class="huge-list-item hover-trigger" data-color="var(--clr-purple)">
+            <div class="hli-content">
+              <h3 class="hli-title">ALIANZA CONSULTIVA</h3>
+              <p class="hli-desc">No somos solo proveedores, somos socios estratégicos. Logramos soluciones WIN-WIN adaptadas a los requisitos de cada cliente.</p>
+              <div class="hli-icon">↗</div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ██████████████████████████████████████████████████████████
+         §5 BUSINESS MODEL (Balanced Layout)
+    ████████████████████████████████████████████████████████████ -->
+    <section class="section-business gsap-section" id="business">
+      <div class="container">
+        <div class="section-header gsap-fade-up">
+          <span class="label-tag">MODELO DE NEGOCIO</span>
+        </div>
+        
+        <div class="business-layout">
+          <div class="business-col-left gsap-fade-up">
+            <h2 class="sticky-title">PROPUESTA<br>DE VALOR</h2>
+            <p class="sticky-desc">Estrategia orientada a la rentabilidad, el alcance masivo y la multiplicación de medios para conectar con audiencias de alto valor.</p>
+          </div>
+
+          <div class="business-col-right">
+            <ul class="b-list">
+              <li class="b-list-item gsap-fade-up">
+                <h3>RENTABILIDAD</h3>
+                <p>Ventas de publicidad, captación de patrocinios y proyecciones garantizadas con resultados tangibles.</p>
+              </li>
+              <li class="b-list-item gsap-fade-up">
+                <h3>ALCANCE MASIVO</h3>
+                <p>Desarrollamos la comercialización de eventos masivos y programas de TV, elevando el valor cultural.</p>
+              </li>
+              <li class="b-list-item gsap-fade-up">
+                <h3>MULTIPLICIDAD</h3>
+                <p>Expertos en TV, Cable, Radio, Digital y Cine. Cobertura premium adaptada a métricas del siglo XXI.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ██████████████████████████████████████████████████████████
+         §6 TESTIMONIALS (GSAP Pinned Horizontal Scroll)
+    ████████████████████████████████████████████████████████████ -->
+    <section class="section-testimonials" id="testimonials">
+      <div class="testi-pin-container">
+        <div class="container testi-header gsap-fade-up">
+          <span class="label-tag">LO QUE DICEN</span>
+        </div>
+        
+        <!-- Pista horizontal para testimonios -->
+        <div class="testi-track" id="testiTrack">
+          
+          <div class="testi-panel">
+            <blockquote class="giant-quote">
+              <p>LOGRAMOS ENCONTRAR UNA SOLUCIÓN 'WIN-WIN'. IMPULSARON UN FUERTE CRECIMIENTO, ADAPTÁNDOSE A NUESTROS REQUISITOS.</p>
+            </blockquote>
+            <div class="quote-author">
+              <p class="author-name">— FELIPE D. HAWTHORNE</p>
+              <p class="author-role">SOCIO COMERCIAL</p>
+            </div>
+          </div>
+          
+          <div class="testi-panel">
+            <blockquote class="giant-quote">
+              <p>KAUAI NO IMPROVISA. EL NIVEL DE COMPROMISO Y LA RENTABILIDAD SUPERARON AMPLIAMENTE NUESTRAS EXPECTATIVAS.</p>
+            </blockquote>
+            <div class="quote-author">
+              <p class="author-name">— SARAH JENKINS</p>
+              <p class="author-role">DIRECTORA DE MARKETING</p>
+            </div>
+          </div>
+
+          <div class="testi-panel">
+            <blockquote class="giant-quote">
+              <p>LA COBERTURA PREMIUM Y EL ENFOQUE ESTRATÉGICO ELEVARON NUESTRA MARCA A UN ESTÁNDAR INTERNACIONAL.</p>
+            </blockquote>
+            <div class="quote-author">
+              <p class="author-name">— MARCUS VALERIUS</p>
+              <p class="author-role">CEO DE EVENTOS VIP</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ██████████████████████████████████████████████████████████
+         §7 TEAM (Clean Grid Layout)
+    ████████████████████████████████████████████████████████████ -->
+    <section class="section-team gsap-section" id="team">
+      <div class="container">
+        <div class="section-header gsap-fade-up">
+          <span class="label-tag">EL EQUIPO</span>
+          <h2 class="section-title">MEET THE AVENGERS</h2>
+        </div>
+        
+        <div class="team-grid">
+          
+          <div class="team-card gsap-fade-up">
+            <div class="team-card-img">
+              <div class="premium-block">FOTO</div>
+            </div>
+            <div class="team-card-info">
+              <h3>JUHANI PALLASMAA</h3>
+              <p>CEO & FOUNDER</p>
+            </div>
+          </div>
+
+          <div class="team-card gsap-fade-up">
+            <div class="team-card-img">
+              <div class="premium-block">FOTO</div>
+            </div>
+            <div class="team-card-info">
+              <h3>FELIPE HAWTHORNE</h3>
+              <p>UX DESIGNER</p>
+            </div>
+          </div>
+
+          <div class="team-card gsap-fade-up">
+            <div class="team-card-img">
+              <div class="premium-block">FOTO</div>
+            </div>
+            <div class="team-card-info">
+              <h3>CHARLOTTE SOPHIA</h3>
+              <p>PHOTOGRAPHER</p>
+            </div>
+          </div>
+
+          <div class="team-card gsap-fade-up">
+            <div class="team-card-img">
+              <div class="premium-block">FOTO</div>
+            </div>
+            <div class="team-card-info">
+              <h3>TNEX VAN</h3>
+              <p>LEAD DEVELOPER</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ██████████████████████████████████████████████████████████
+         §8 FOOTER / FINAL CTA (Magnetic Vibrant Banner)
+    ████████████████████████████████████████████████████████████ -->
+    <footer class="section-footer gsap-section" id="contact">
+      <div class="container">
+        
+        <div class="footer-cta gsap-fade-up">
+          <h2 class="giant-cta">¿TRABAJAMOS<br>JUNTOS?</h2>
+          <div class="magnetic-wrap" id="magneticWrap">
+            <a href="mailto:info@stotage.com" class="magnetic-btn" id="magneticBtn">
+              <span>INICIAR PROYECTO</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-bottom gsap-fade-up">
+          <div class="footer-brand">
+            <span class="logo-k">K</span>
+            <p>KAUAI MEDIOS &<br>COMMUNICATIONS</p>
+          </div>
+
+          <div class="footer-links">
+            <a href="#">TWITTER(X)</a>
+            <a href="#">INSTAGRAM</a>
+            <a href="#">LINKEDIN</a>
+          </div>
+
+          <div class="footer-copy">
+            <p>©2026 KAUAI. DISEÑO DE VANGUARDIA.</p>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div><!-- /#smooth-content -->
+</main><!-- /#smooth-wrapper -->
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════════════════════ -->
+<!-- Lenis (Smooth Scroll) -->
+<script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+
+<!-- GSAP Core & ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- Main JS -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
