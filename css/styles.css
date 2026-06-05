@@ -7,10 +7,17 @@
    CSS CUSTOM PROPERTIES (THEMING)
    ---------------------------------------------------------------- */
 :root {
-  /* Brand Core Colors (Persist across themes) */
-  --clr-primary:        #1D4ED8;
-  --clr-secondary:      #3DB0C4;
-  --clr-purple:         #5D507C;
+  /* ── PALETA CORPORATIVA KAUAI ── */
+  --clr-turquesa:     #00C7C7;
+  --clr-azul:         #0077EE;
+  --clr-morado:       #5500AA;
+  --clr-blanco:       #FFFFFF;
+  --clr-fondo-oscuro: #0a0a0a;
+
+  /* Aliases semánticos usados en el resto del código */
+  --clr-primary:      var(--clr-azul);
+  --clr-secondary:    var(--clr-turquesa);
+  --clr-purple:       var(--clr-morado);
 
   /* Typography */
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -21,13 +28,15 @@
   --header-height: 100px;
   
   /* Z-index */
-  --z-nav:    1000;
-  --z-menu:   2000;
+  --z-nav:     1000;
+  --z-menu:    2000;
+  --z-hover:    500;
+  --z-cursor:  9999;
 }
 
 /* DARK THEME (Default) */
 html.dark-mode {
-  --bg-primary:         #050505;
+  --bg-primary:         var(--clr-fondo-oscuro);
   --bg-secondary:       #111111;
   --txt-primary:        #FFFFFF;
   --txt-secondary:      #A1A1AA;
@@ -73,6 +82,8 @@ body {
   overflow-x: hidden;
   padding-top: var(--header-height);
   transition: background-color 0.4s ease, color 0.4s ease;
+  /* Cursor personalizado — oculta el cursor nativo */
+  cursor: none;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -147,27 +158,28 @@ ul, ol { list-style: none; }
   align-items: center;
   gap: 1rem;
 }
-.logo-k {
-  width: 48px;
-  height: 48px;
-  background-color: var(--txt-primary);
-  color: var(--bg-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 900;
-  border-radius: 4px;
-  transition: background-color 0.4s, color 0.4s;
+/* Logo imagen en header */
+.header-logo-img {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: filter 0.3s, opacity 0.3s;
 }
-.logo-text {
-  display: flex;
-  flex-direction: column;
-  font-weight: 800;
-  font-size: 0.9rem;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+/* DARK MODE: mix-blend-mode:screen hace los píxeles negros del fondo
+   del PNG completamente transparentes, mostrando solo las letras de colores */
+html.dark-mode .header-logo-img {
+  mix-blend-mode: screen;
+  filter: brightness(1.4) saturate(1.2);
 }
+/* LIGHT MODE: imagen normal, sin mezcla */
+html.light-mode .header-logo-img {
+  mix-blend-mode: normal;
+  filter: none;
+}
+/* Fallback: ocultar el antiguo logo-k y logo-text si siguen en el DOM */
+.logo-k, .logo-text { display: none; }
+
 
 .header-right {
   display: flex;
@@ -351,26 +363,54 @@ html.light-mode .theme-icon-light { transform: translateY(0); opacity: 1; }
   flex-direction: column;
   justify-content: center;
   padding: 5vh 0;
+  color: var(--clr-blanco); /* texto siempre blanco sobre video */
 }
 .hero-bg-media {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   overflow: hidden;
 }
+/* Video de fondo del hero */
+.hero-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+/* Overlay oscuro semitransparente para legibilidad */
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 10, 10, 0.70) 0%,
+    rgba(85, 0, 170, 0.28) 60%,
+    rgba(10, 10, 10, 0.62) 100%
+  );
+}
+/* Glows decorativos encima del overlay */
 .hero-glow {
   position: absolute;
   border-radius: 50%;
   filter: blur(100px);
-  opacity: 0.4;
+  opacity: 0.25;
   animation: floatGlow 10s infinite alternate ease-in-out;
+  z-index: 2;
 }
-.hero-glow.primary { width: 50vw; height: 50vw; background-color: var(--clr-primary); top: -20%; left: -10%; }
-.hero-glow.secondary { width: 40vw; height: 40vw; background-color: var(--clr-secondary); bottom: -10%; right: -10%; animation-delay: -5s; }
+.hero-glow.primary   { width: 50vw; height: 50vw; background-color: var(--clr-azul);    top: -20%; left: -10%; }
+.hero-glow.secondary { width: 40vw; height: 40vw; background-color: var(--clr-turquesa); bottom: -10%; right: -10%; animation-delay: -5s; }
 @keyframes floatGlow {
-  0% { transform: translate(0, 0) scale(1); }
+  0%   { transform: translate(0, 0) scale(1); }
   100% { transform: translate(10%, 10%) scale(1.1); }
 }
+
+/* Contenido hero sobre el overlay */
+.hero-container { position: relative; z-index: 3; }
 
 .hero-top-meta { margin-bottom: 4vh; }
 .hero-badge {
@@ -400,15 +440,50 @@ html.light-mode .theme-icon-light { transform: translateY(0); opacity: 1; }
   margin-bottom: 5vh;
   display: flex;
   flex-direction: column;
+  color: var(--clr-blanco);
 }
 .hero-title .outline {
-  -webkit-text-stroke: 2px var(--txt-primary);
+  -webkit-text-stroke: 2px rgba(255,255,255,0.8);
   color: transparent;
 }
-html.light-mode .hero-title .outline {
-  -webkit-text-stroke: 2px var(--txt-primary);
-}
 .hero-title .align-right { align-self: flex-end; }
+.hero-title .primary-color { color: var(--clr-turquesa); }
+
+/* ------- VIDEO EXPANSIVO ------- */
+.section-expanding-video {
+  padding: 0;
+  /* Espacio visual para separar del hero sin un corte brusco */
+  padding-top: clamp(4rem, 8vw, 8rem);
+  padding-bottom: clamp(4rem, 8vw, 8rem);
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-primary);
+  overflow: hidden;
+  /* Eliminamos margin-top negativo: conexión suave con gradiente del hero */
+  margin-top: 0;
+}
+.expanding-video-wrap {
+  width: 40vw;
+  border-radius: 40px;
+  overflow: hidden;
+  will-change: width, border-radius;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+  /* centra el contenedor independientemente de su ancho */
+  position: relative;
+}
+.expanding-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: inherit;
+}
+@media (max-width: 768px) {
+  .expanding-video-wrap { width: 85vw; border-radius: 20px; }
+}
 
 /* Subtitle moved below title */
 .hero-bottom-meta {
@@ -422,12 +497,12 @@ html.light-mode .hero-title .outline {
   font-size: clamp(1.2rem, 1.5vw, 1.5rem);
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: var(--clr-primary);
+  color: var(--clr-turquesa);
 }
 .hero-desc {
   font-size: clamp(1rem, 1.25vw, 1.25rem);
   font-weight: 500;
-  color: var(--txt-secondary);
+  color: rgba(255,255,255,0.75);
   max-width: 45ch;
 }
 
@@ -539,31 +614,39 @@ html.light-mode .hero-title .outline {
   .hli-icon { display: none; }
 }
 
-/* Hover Image Reveal Container - Resized & 16:9 Aspect Ratio */
+/* Hover VIDEO Reveal Container — tamaño reducido, posición corregida */
 .hover-reveal-container {
   position: fixed;
   top: 0; left: 0;
-  width: 450px;           /* Resized max-width */
-  aspect-ratio: 16/9;     /* Horizontal aspect ratio */
+  /* Reducido de 460px a 300px para que no tape el contenido */
+  width: 300px;
+  aspect-ratio: 16 / 9;
   pointer-events: none;
-  z-index: 500;
+  z-index: var(--z-hover);
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.8);
-  transition: opacity 0.3s, transform 0.3s;
-  border-radius: 12px;    /* Elegant borders */
+  /* transform corregido: -50% X, -65% Y para que quede más centrado al cursor
+     y no tan por debajo */
+  transform: translate(-50%, -65%) scale(0.85) rotate(-2deg);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* Floating shadow */
-  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.15);
 }
 .hover-reveal-container.active {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -65%) scale(1) rotate(0deg);
 }
 .hover-reveal-inner {
   width: 100%; height: 100%;
-  background-color: var(--clr-primary);
-  background-size: cover;
-  background-position: center;
+  background-color: var(--clr-morado);
+}
+.hover-reveal-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* ----------------------------------------------------------------
@@ -693,8 +776,12 @@ html.light-mode .section-testimonials {
    ---------------------------------------------------------------- */
 .section-footer {
   padding: var(--pad-y-huge) 0 4vw 0;
-  /* Brand vibrant blue background */
-  background-color: var(--clr-primary);
+  background: linear-gradient(
+    135deg,
+    var(--clr-morado) 0%,
+    var(--clr-azul)   60%,
+    var(--clr-turquesa) 100%
+  );
   color: #FFFFFF;
 }
 .footer-cta {
@@ -777,3 +864,210 @@ html.light-mode .section-testimonials {
 
 /* GSAP Helper */
 .gsap-fade-up { opacity: 0; transform: translateY(40px); }
+
+/* ----------------------------------------------------------------
+   §7 MOSAICO 4 PILARES — Video Flip
+   ---------------------------------------------------------------- */
+.section-pillars {
+  padding: var(--pad-y-section) 0 0 0;
+}
+.pillars-header {
+  margin-bottom: 4vw;
+}
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 75vh;
+  min-height: 480px;
+}
+
+/* --- Pilar base --- */
+.pillar {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  /* border-right sutil entre pilares */
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.pillar:last-child { border-right: none; }
+
+/* --- Fondo de video --- */
+.pillar-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.pillar-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.pillar:hover .pillar-bg video {
+  transform: scale(1.06);
+}
+
+/* --- Overlay gradiente --- */
+.pillar-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg,
+    rgba(0,0,0,0.10) 0%,
+    rgba(0,0,0,0.72) 100%);
+  transition: background 0.5s;
+}
+.pillar:hover .pillar-overlay {
+  background: linear-gradient(180deg,
+    rgba(85,0,170,0.45) 0%,
+    rgba(0,0,0,0.88) 100%);
+}
+
+/* --- Caras del flip (front y back) --- */
+.pillar-face {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(1.5rem, 2.5vw, 2.5rem);
+  color: #FFFFFF;
+  /* La transición es el corazón del efecto flip */
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Front: visible por defecto */
+.pillar-front  { transform: translateX(0); }
+
+/* Back: oculto a la derecha por defecto */
+.pillar-back   { transform: translateX(100%); }
+
+/* Cuando el ratón viene de la derecha, back empieza a la izquierda */
+.pillar.from-left .pillar-back  { transform: translateX(-100%); }
+
+/* Hover activo: front sale, back entra */
+.pillar.is-active .pillar-front {
+  transform: translateX(100%);
+}
+.pillar.is-active.from-left .pillar-front {
+  transform: translateX(-100%);
+}
+.pillar.is-active .pillar-back,
+.pillar.is-active.from-left .pillar-back {
+  transform: translateX(0);
+}
+
+/* Tipografía de pilares */
+.pillar-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--clr-turquesa);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.pillar-name {
+  font-size: clamp(1.3rem, 2vw, 2rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+.pillar-desc {
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  line-height: 1.5;
+  color: rgba(255,255,255,0.80);
+  margin-bottom: 1.5rem;
+}
+.pillar-cta {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--clr-turquesa);
+  border-bottom: 1px solid var(--clr-turquesa);
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+}
+.pillar-cta:hover {
+  color: var(--clr-blanco);
+  border-color: var(--clr-blanco);
+}
+
+/* Responsive: en móvil 2x2 */
+@media (max-width: 900px) {
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+  }
+  .pillar { min-height: 50vw; }
+}
+@media (max-width: 480px) {
+  .pillars-grid { grid-template-columns: 1fr; }
+  .pillar { min-height: 65vw; }
+}
+
+/* ----------------------------------------------------------------
+   MENU LOGO (sidebar)
+   ---------------------------------------------------------------- */
+.menu-logo-wrap {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+.menu-logo-img {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Menú sidebar refactorizado — links brutalistas PROPORCIONADOS */
+.menu-link {
+  font-size: clamp(1.6rem, 3.2vw, 3rem); /* reducido de 5rem */
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--txt-primary);
+  display: block;
+  padding: 1.4rem 0;            /* menos padding que antes */
+  transition: color 0.3s, padding-left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1;
+}
+.menu-link:hover {
+  color: var(--clr-turquesa);
+  padding-left: 2rem;
+}
+
+/* ----------------------------------------------------------------
+   CUSTOM CURSOR
+   ---------------------------------------------------------------- */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: var(--z-cursor);
+  transform: translate(-50%, -50%);
+  transition: width 0.25s cubic-bezier(0.16,1,0.3,1),
+              height 0.25s cubic-bezier(0.16,1,0.3,1),
+              opacity 0.3s;
+  will-change: transform, width, height;
+}
+.custom-cursor.is-hovering {
+  width: 48px;
+  height: 48px;
+}
+/* En móvil el cursor nativo vuelve */
+@media (pointer: coarse) {
+  body  { cursor: auto; }
+  .custom-cursor { display: none; }
+}

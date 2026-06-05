@@ -20,10 +20,17 @@
 <body>
 
 <!-- ══════════════════════════════════════════════════════════════
-     HOVER REVEAL IMAGE CONTAINER (GSAP)
+     CUSTOM CURSOR
+══════════════════════════════════════════════════════════════ -->
+<div class="custom-cursor" id="customCursor"></div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HOVER REVEAL VIDEO CONTAINER (GSAP)
 ══════════════════════════════════════════════════════════════ -->
 <div class="hover-reveal-container" id="hoverRevealContainer" aria-hidden="true">
-  <div class="hover-reveal-inner" id="hoverRevealInner"></div>
+  <div class="hover-reveal-inner" id="hoverRevealInner">
+    <video class="hover-reveal-video" id="hoverRevealVideo" autoplay loop muted playsinline></video>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════
@@ -31,12 +38,12 @@
 ══════════════════════════════════════════════════════════════ -->
 <header class="header" id="header">
   <div class="container header-inner">
-    <a href="#" class="logo-link" aria-label="KAUAI Inicio">
-      <span class="logo-k">K</span>
-      <div class="logo-text">
-        <span>KAUAI</span>
-        <span>MEDIOS</span>
-      </div>
+    <a href="#hero" class="logo-link" aria-label="KAUAI Inicio">
+      <img
+        src="Imagenes_pagina_inicio/KAUAI LOGO.png"
+        alt="KAUAI Medios &amp; Communications"
+        class="header-logo-img"
+      />
     </a>
 
     <div class="header-right">
@@ -66,15 +73,20 @@
   <div class="menu-bg"></div>
   <div class="menu-content container">
     <div class="menu-grid">
+
       <ul class="menu-links" role="list">
-        <li><a href="#about" class="menu-link" data-text="01. SOBRE NOSOTROS">01. SOBRE NOSOTROS</a></li>
-        <li><a href="#expertise" class="menu-link" data-text="02. EXPERTISE">02. EXPERTISE</a></li>
-        <li><a href="#business" class="menu-link" data-text="03. MODELO">03. MODELO</a></li>
-        <li><a href="#team" class="menu-link" data-text="04. EQUIPO">04. EQUIPO</a></li>
-        <li><a href="#contact" class="menu-link" data-text="05. CONTACTO">05. CONTACTO</a></li>
+        <li><a href="index.html"            class="menu-link">INICIO</a></li>
+        <li><a href="sobre-nosotros.html"   class="menu-link">SOBRE NOSOTROS</a></li>
+        <li><a href="servicios.html"         class="menu-link">SERVICIOS</a></li>
+        <li><a href="contacto.html"          class="menu-link">CONTACTO</a></li>
       </ul>
-      
+
       <div class="menu-sidebar">
+        <!-- Logo imagen en menú -->
+        <div class="menu-logo-wrap">
+          <img src="Imagenes_pagina_inicio/KAUAI LOGO.png" alt="KAUAI Medios" class="menu-logo-img" />
+        </div>
+
         <div class="menu-info">
           <p class="menu-label">CONTÁCTANOS</p>
           <a href="mailto:info@stotage.com" class="menu-email">info@stotage.com</a>
@@ -102,8 +114,18 @@
     <!-- ██████████████████████████████████████████████████████████
          §1 HERO SECTION
     ████████████████████████████████████████████████████████████ -->
-    <section class="section-hero">
+    <section class="section-hero" id="hero">
       <div class="hero-bg-media" aria-hidden="true">
+        <!-- Video de fondo del mar -->
+        <video
+          class="hero-bg-video"
+          autoplay loop muted playsinline
+          aria-hidden="true"
+        >
+          <source src="Videos_pagina_inicio/Video_fondo_mar_pagina_inicio.mp4" type="video/mp4" />
+        </video>
+        <!-- Overlay oscuro para legibilidad del texto sobre el video -->
+        <div class="hero-video-overlay"></div>
         <div class="hero-glow primary"></div>
         <div class="hero-glow secondary"></div>
         <div class="hero-noise"></div>
@@ -125,7 +147,6 @@
           <div class="title-line primary-color align-right">COMERCIALES.</div>
         </h1>
 
-        <!-- Subtitle moved below the title -->
         <div class="hero-bottom-meta gsap-fade-up">
           <p class="hero-meta-text">KAUAI no improvisa. Se sumerge en tu negocio.</p>
           <p class="hero-desc">
@@ -133,6 +154,21 @@
           </p>
         </div>
 
+      </div>
+    </section>
+
+    <!-- ██████████████████████████████████████████████████████████
+         §1b VIDEO EXPANSIVO — Crece con el scroll (ScrollTrigger)
+    ████████████████████████████████████████████████████████████ -->
+    <section class="section-expanding-video" id="expanding-video">
+      <div class="expanding-video-wrap" id="expandingVideoWrap">
+        <video
+          class="expanding-video"
+          id="expandingVideo"
+          autoplay loop muted playsinline
+        >
+          <source src="Videos_pagina_inicio/Video_de_reunion_pagina_inicio.mp4" type="video/mp4" />
+        </video>
       </div>
     </section>
 
@@ -209,8 +245,8 @@
         </div>
 
         <ul class="huge-list" role="list">
-          
-          <li class="huge-list-item hover-trigger" data-color="var(--clr-primary)">
+
+          <li class="huge-list-item video-hover-trigger" data-video="Videos_pagina_inicio/servicio-variedad.mp4">
             <div class="hli-content">
               <h3 class="hli-title">VARIEDAD DE MEDIOS</h3>
               <p class="hli-desc">Expertos en negociaciones para TV, Cable, Radio, Digital y Cine. Conectamos de forma efectiva con diversas audiencias.</p>
@@ -218,7 +254,7 @@
             </div>
           </li>
 
-          <li class="huge-list-item hover-trigger" data-color="var(--clr-secondary)">
+          <li class="huge-list-item video-hover-trigger" data-video="Videos_pagina_inicio/servicio-enfoque.mp4">
             <div class="hli-content">
               <h3 class="hli-title">ENFOQUE ESTRATÉGICO</h3>
               <p class="hli-desc">Cada decisión parte de un análisis profundo de tu negocio. Desarrollamos estrategias personalizadas con proyecciones garantizadas.</p>
@@ -226,7 +262,7 @@
             </div>
           </li>
 
-          <li class="huge-list-item hover-trigger" data-color="var(--clr-purple)">
+          <li class="huge-list-item video-hover-trigger" data-video="Videos_pagina_inicio/servicio-alianza.mp4">
             <div class="hli-content">
               <h3 class="hli-title">ALIANZA CONSULTIVA</h3>
               <p class="hli-desc">No somos solo proveedores, somos socios estratégicos. Logramos soluciones WIN-WIN adaptadas a los requisitos de cada cliente.</p>
@@ -320,58 +356,97 @@
     </section>
 
     <!-- ██████████████████████████████████████████████████████████
-         §7 TEAM (Clean Grid Layout)
+         §7 MOSAICO 4 PILARES (Video Flip Mosaic)
     ████████████████████████████████████████████████████████████ -->
-    <section class="section-team gsap-section" id="team">
-      <div class="container">
-        <div class="section-header gsap-fade-up">
-          <span class="label-tag">EL EQUIPO</span>
-          <h2 class="section-title">MEET THE AVENGERS</h2>
-        </div>
-        
-        <div class="team-grid">
-          
-          <div class="team-card gsap-fade-up">
-            <div class="team-card-img">
-              <div class="premium-block">FOTO</div>
-            </div>
-            <div class="team-card-info">
-              <h3>JUHANI PALLASMAA</h3>
-              <p>CEO & FOUNDER</p>
-            </div>
-          </div>
+    <section class="section-pillars" id="pillars">
 
-          <div class="team-card gsap-fade-up">
-            <div class="team-card-img">
-              <div class="premium-block">FOTO</div>
-            </div>
-            <div class="team-card-info">
-              <h3>FELIPE HAWTHORNE</h3>
-              <p>UX DESIGNER</p>
-            </div>
-          </div>
+      <div class="container pillars-header gsap-fade-up">
+        <span class="label-tag">NUESTROS PILARES</span>
+        <h2 class="section-title">LO QUE NOS DEFINE</h2>
+      </div>
 
-          <div class="team-card gsap-fade-up">
-            <div class="team-card-img">
-              <div class="premium-block">FOTO</div>
-            </div>
-            <div class="team-card-info">
-              <h3>CHARLOTTE SOPHIA</h3>
-              <p>PHOTOGRAPHER</p>
-            </div>
-          </div>
+      <div class="pillars-grid">
 
-          <div class="team-card gsap-fade-up">
-            <div class="team-card-img">
-              <div class="premium-block">FOTO</div>
-            </div>
-            <div class="team-card-info">
-              <h3>TNEX VAN</h3>
-              <p>LEAD DEVELOPER</p>
-            </div>
+        <!-- PILAR 1 -->
+        <article class="pillar" data-pillar="0">
+          <div class="pillar-bg">
+            <video autoplay loop muted playsinline>
+              <source src="Videos_pagina_inicio/Video_fondo_mar_pagina_inicio.mp4" type="video/mp4" />
+            </video>
           </div>
+          <div class="pillar-overlay"></div>
+          <div class="pillar-face pillar-front">
+            <span class="pillar-num">01</span>
+            <h3 class="pillar-name">ESTRATEGIA<br>COMERCIAL</h3>
+          </div>
+          <div class="pillar-face pillar-back">
+            <span class="pillar-num">01</span>
+            <h3 class="pillar-name">ESTRATEGIA<br>COMERCIAL</h3>
+            <p class="pillar-desc">Definimos cada movimiento con precisión. Estrategias orientadas a maximizar el retorno y el impacto de marca.</p>
+            <a href="servicios.html" class="pillar-cta">VER MÁS →</a>
+          </div>
+        </article>
 
-        </div>
+        <!-- PILAR 2 -->
+        <article class="pillar" data-pillar="1">
+          <div class="pillar-bg">
+            <video autoplay loop muted playsinline>
+              <source src="Videos_pagina_inicio/servicio-variedad.mp4.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="pillar-overlay"></div>
+          <div class="pillar-face pillar-front">
+            <span class="pillar-num">02</span>
+            <h3 class="pillar-name">VARIEDAD<br>DE MEDIOS</h3>
+          </div>
+          <div class="pillar-face pillar-back">
+            <span class="pillar-num">02</span>
+            <h3 class="pillar-name">VARIEDAD<br>DE MEDIOS</h3>
+            <p class="pillar-desc">TV, Cable, Radio, Digital y Cine. Cobertura total en los medios que importan a tu audiencia.</p>
+            <a href="servicios.html" class="pillar-cta">VER MÁS →</a>
+          </div>
+        </article>
+
+        <!-- PILAR 3 -->
+        <article class="pillar" data-pillar="2">
+          <div class="pillar-bg">
+            <video autoplay loop muted playsinline>
+              <source src="Videos_pagina_inicio/servicio-enfoque.mp4.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="pillar-overlay"></div>
+          <div class="pillar-face pillar-front">
+            <span class="pillar-num">03</span>
+            <h3 class="pillar-name">ENFOQUE<br>ESTRATÉGICO</h3>
+          </div>
+          <div class="pillar-face pillar-back">
+            <span class="pillar-num">03</span>
+            <h3 class="pillar-name">ENFOQUE<br>ESTRATÉGICO</h3>
+            <p class="pillar-desc">Análisis profundo de tu negocio. Estrategias personalizadas con proyecciones y resultados garantizados.</p>
+            <a href="servicios.html" class="pillar-cta">VER MÁS →</a>
+          </div>
+        </article>
+
+        <!-- PILAR 4 -->
+        <article class="pillar" data-pillar="3">
+          <div class="pillar-bg">
+            <video autoplay loop muted playsinline>
+              <source src="Videos_pagina_inicio/servicio-alianza.mp4.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="pillar-overlay"></div>
+          <div class="pillar-face pillar-front">
+            <span class="pillar-num">04</span>
+            <h3 class="pillar-name">ALIANZA<br>CONSULTIVA</h3>
+          </div>
+          <div class="pillar-face pillar-back">
+            <span class="pillar-num">04</span>
+            <h3 class="pillar-name">ALIANZA<br>CONSULTIVA</h3>
+            <p class="pillar-desc">No somos proveedores, somos socios estratégicos. Soluciones WIN-WIN adaptadas a cada cliente.</p>
+            <a href="contacto.html" class="pillar-cta">CONECTAR →</a>
+          </div>
+        </article>
+
       </div>
     </section>
 
@@ -382,7 +457,7 @@
       <div class="container">
         
         <div class="footer-cta gsap-fade-up">
-          <h2 class="giant-cta">¿TRABAJAMOS<br>JUNTOS?</h2>
+          <h2 class="giant-cta">TU HISTORIA<br>EMPIEZA AQUÍ.</h2>
           <div class="magnetic-wrap" id="magneticWrap">
             <a href="mailto:info@stotage.com" class="magnetic-btn" id="magneticBtn">
               <span>INICIAR PROYECTO</span>

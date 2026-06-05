@@ -77,15 +77,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   menuLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (isMenuOpen) toggleMenu();
-      const targetId = link.getAttribute('href');
-      if (targetId !== '#') {
-        lenis.scrollTo(targetId, {
-          offset: -100, // Account for fixed header
+      const href = link.getAttribute('href');
+      const isSamePage = href && href.startsWith('#');
+
+      if (isSamePage) {
+        // Ancla interna: prevent default + smooth scroll
+        e.preventDefault();
+        if (isMenuOpen) toggleMenu();
+        lenis.scrollTo(href, {
+          offset: -100,
           duration: 1.5,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
         });
+      } else {
+        // Página externa: cierra menú y deja navegar normalmente
+        if (isMenuOpen) toggleMenu();
+        // Sin preventDefault → el navegador navega al href
       }
     });
   });
@@ -158,35 +165,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================================================
-  // 5. HOVER REVEAL LOGIC (SERVICES)
+  // 5. HOVER REVEAL — VIDEO solo en zona de contenido (no en padding del li)
   // ==========================================================================
-  const hoverContainer = document.getElementById('hoverRevealContainer');
-  const hoverInner = document.getElementById('hoverRevealInner');
-  const hoverTriggers = document.querySelectorAll('.hover-trigger');
+  const hoverContainer  = document.getElementById('hoverRevealContainer');
+  const hoverVideo      = document.getElementById('hoverRevealVideo');
+  // CLAVE: el trigger es el div .hli-content, NO el li completo.
+  // Así el video solo aparece cuando el cursor está sobre el texto,
+  // no en las zonas de padding superior/inferior del ítem (zonas rojas).
+  const videoTriggers   = document.querySelectorAll('.video-hover-trigger .hli-content');
 
-  if (hoverContainer && window.matchMedia("(pointer: fine)").matches) {
+  if (hoverContainer && hoverVideo && window.matchMedia('(pointer: fine)').matches) {
+
+    // El contenedor sigue al ratón con GSAP suavizado
     window.addEventListener('mousemove', (e) => {
       gsap.to(hoverContainer, {
         x: e.clientX,
         y: e.clientY,
-        duration: 0.5,
-        ease: "power3.out"
+        duration: 0.55,
+        ease: 'power3.out'
       });
     });
 
-    hoverTriggers.forEach(trigger => {
-      trigger.addEventListener('mouseenter', () => {
-        const color = trigger.getAttribute('data-color') || '#1D4ED8';
-        hoverInner.style.backgroundColor = color;
+    videoTriggers.forEach(contentEl => {
+      // Sube al li padre para leer el atributo data-video
+      const videoSrc = contentEl.closest('.video-hover-trigger').getAttribute('data-video');
+
+      contentEl.addEventListener('mouseenter', () => {
+        if (hoverVideo.getAttribute('src') !== videoSrc) {
+          hoverVideo.src = videoSrc;
+          hoverVideo.load();
+          hoverVideo.play().catch(() => {});
+        }
         hoverContainer.classList.add('active');
         hoverContainer.setAttribute('aria-hidden', 'false');
       });
 
-      trigger.addEventListener('mouseleave', () => {
+      contentEl.addEventListener('mouseleave', () => {
         hoverContainer.classList.remove('active');
         hoverContainer.setAttribute('aria-hidden', 'true');
       });
     });
+  }
+
+
+  // ==========================================================================
+  // 5b. VIDEO EXPANSIVO — GSAP ScrollTrigger BIDIRECCIONAL
+  //     Fase 1 (50%):  40vw  → 100vw  /  border-radius 40px → 0px
+  //     Fase 2 (50%): 100vw  →  40vw  /  border-radius  0px → 40px
+  //     scrub: true  garantiza que siga el scroll en ambas direcciones
+  // ==========================================================================
+  const expandingSection = document.getElementById('expanding-video');
+  const expandingWrap    = document.getElementById('expandingVideoWrap');
+
+  if (expandingSection && expandingWrap) {
+    const tlExpand = gsap.timeline({
+      scrollTrigger: {
+        trigger: expandingSection,
+        // La sección ocupa 80vh; queremos que la animación cubra todo el scroll de ella
+        start: 'top bottom',    // empieza cuando el tope de la sección entra por abajo
+        end:   'bottom top',    // termina cuando el fondo de la sección sale por arriba
+        scrub: 1.2,             // lag suave atado a Lenis
+        invalidateOnRefresh: true
+      }
+    });
+
+    // Fase EXPAND: de pequeño a pantalla completa (primeras 2/3 del scroll)
+    tlExpand.fromTo(expandingWrap,
+      { width: '40vw',  borderRadius: '40px' },
+      { width: '100vw', borderRadius: '0px',  ease: 'power2.inOut', duration: 2 }
+    )
+    // Fase RETRACT: vuelve a su tamaño original (tercio final del scroll)
+    .to(expandingWrap,
+      { width: '40vw',  borderRadius: '40px', ease: 'power2.inOut', duration: 2 }
+    );
   }
 
 
@@ -232,6 +283,72 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // ==========================================================================
+  // 7. CUSTOM CURSOR — Sigue al ratón con GSAP + crece en hover
+  // ==========================================================================
+  const cursor = document.getElementById('customCursor');
+
+  if (cursor && window.matchMedia('(pointer: fine)').matches) {
+    // Movimiento suave con GSAP
+    window.addEventListener('mousemove', (e) => {
+      gsap.to(cursor, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.15,
+        ease: 'power2.out'
+      });
+    });
+
+    // Crece al pasar por encima de a, button
+    const hoverables = document.querySelectorAll('a, button, .huge-list-item');
+    hoverables.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('is-hovering'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('is-hovering'));
+    });
+
+    // Ocultar cursor al salir de la ventana
+    document.addEventListener('mouseleave', () => gsap.to(cursor, { opacity: 0, duration: 0.3 }));
+    document.addEventListener('mouseenter', () => gsap.to(cursor, { opacity: 1, duration: 0.3 }));
+  }
+
+  // ==========================================================================
+  // 8. MOSAICO 4 PILARES — Flip animación izquierda/derecha según dirección
+  // ==========================================================================
+  const pillars = document.querySelectorAll('.pillar');
+
+  pillars.forEach(pillar => {
+    let exitTimer = null;
+
+    pillar.addEventListener('mouseenter', (e) => {
+      // Cancelar timer de salida si existe
+      if (exitTimer) { clearTimeout(exitTimer); exitTimer = null; }
+
+      const rect = pillar.getBoundingClientRect();
+      const midX = rect.left + rect.width / 2;
+
+      // Detectar desde qué lado entra el cursor
+      if (e.clientX <= midX) {
+        // Cursor viene del lado izquierdo: back entra desde la izquierda
+        pillar.classList.add('from-left');
+        pillar.classList.remove('from-right');
+      } else {
+        // Cursor viene del lado derecho: back entra desde la derecha
+        pillar.classList.remove('from-left');
+        pillar.classList.add('from-right');
+      }
+
+      pillar.classList.add('is-active');
+    });
+
+    pillar.addEventListener('mouseleave', () => {
+      pillar.classList.remove('is-active');
+      // Limpiar clases de dirección después de que termine la transición (0.55s)
+      exitTimer = setTimeout(() => {
+        pillar.classList.remove('from-left', 'from-right');
+      }, 600);
+    });
+  });
 
   // Refresh ScrollTrigger after loading ensures correct calculations
   window.addEventListener('load', () => {

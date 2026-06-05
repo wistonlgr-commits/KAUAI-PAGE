@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es" class="lenis lenis-smooth dark-mode" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sobre KAUAI Medios & Communications — nuestra historia, misión, valores y equipo detrás de la agencia líder en medios del Caribe." />
+  <title>Sobre Nosotros — KAUAI Medios & Communications</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.0.45/dist/lenis.css">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* ─── PAGE-SPECIFIC: SOBRE NOSOTROS ─── */
+
+    /* HERO */
+    .sn-hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: clamp(4rem, 8vw, 8rem);
+      overflow: hidden;
+    }
+    .sn-hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .sn-hero-bg video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .sn-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.25) 0%,
+        rgba(0,0,0,0.70) 60%,
+        var(--bg-primary) 100%
+      );
+      z-index: 1;
+    }
+    .sn-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .sn-hero-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--clr-turquesa);
+      border: 1px solid var(--clr-turquesa);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+    .sn-hero-title {
+      font-size: clamp(4rem, 12vw, 11rem);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      color: var(--txt-primary);
+      margin-bottom: 2rem;
+    }
+    .sn-hero-title .outline {
+      -webkit-text-stroke: 2px var(--txt-primary);
+      color: transparent;
+    }
+    .sn-hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      color: rgba(255,255,255,0.70);
+      max-width: 520px;
+      line-height: 1.5;
+    }
+
+    /* MISSION / VISION */
+    .sn-mv {
+      padding: var(--pad-y-section) 0;
+      border-top: 1px solid var(--bdr-color);
+    }
+    .sn-mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5vw;
+      align-items: center;
+    }
+    .sn-mv-statement {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    .sn-mv-statement .outline {
+      -webkit-text-stroke: 2px var(--txt-primary);
+      color: transparent;
+    }
+    .sn-mv-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .sn-mv-card {
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 2rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .sn-mv-card:hover {
+      border-color: var(--clr-turquesa);
+      background: rgba(0,199,199,0.04);
+    }
+    .sn-mv-card-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--clr-turquesa);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .sn-mv-card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* TIMELINE */
+    .sn-timeline {
+      padding: var(--pad-y-section) 0;
+      border-top: 1px solid var(--bdr-color);
+    }
+    .sn-timeline-list {
+      position: relative;
+      margin-top: 4rem;
+      padding-left: 2rem;
+      border-left: 2px solid rgba(255,255,255,0.1);
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+    .sn-tl-item {
+      position: relative;
+    }
+    .sn-tl-item::before {
+      content: '';
+      position: absolute;
+      left: -2.6rem;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--clr-turquesa);
+      box-shadow: 0 0 0 4px rgba(0,199,199,0.2);
+    }
+    .sn-tl-year {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--clr-turquesa);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .sn-tl-title {
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+    .sn-tl-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+      max-width: 560px;
+    }
+
+    /* VALUES */
+    .sn-values {
+      padding: var(--pad-y-section) 0;
+      border-top: 1px solid var(--bdr-color);
+    }
+    .sn-values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 4rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .sn-val-card {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.4s;
+    }
+    .sn-val-card:last-child { border-right: none; }
+    .sn-val-card:hover { background: rgba(255,255,255,0.03); }
+    .sn-val-num {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--clr-turquesa);
+      margin-bottom: 1.5rem;
+    }
+    .sn-val-title {
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+    .sn-val-desc {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .sn-mv-grid { grid-template-columns: 1fr; }
+      .sn-values-grid { grid-template-columns: 1fr; }
+      .sn-val-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    }
+    @media (max-width: 600px) {
+      .sn-hero-title { font-size: clamp(3rem, 14vw, 6rem); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="custom-cursor" id="customCursor"></div>
+
+<!-- HOVER REVEAL (requerido por main.js) -->
+<div class="hover-reveal-container" id="hoverRevealContainer" aria-hidden="true">
+  <div class="hover-reveal-inner" id="hoverRevealInner">
+    <video class="hover-reveal-video" id="hoverRevealVideo" autoplay loop muted playsinline></video>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════════════════════ -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-link" aria-label="KAUAI Inicio">
+      <img
+        src="Imagenes_pagina_inicio/KAUAI LOGO.png"
+        alt="KAUAI Medios & Communications"
+        class="header-logo-img"
+      />
+    </a>
+
+    <div class="header-right">
+      <a href="mailto:info@stotage.com" class="header-contact hide-mobile">INFO@STOTAGE.COM</a>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema de color">
+        <span class="theme-icon-dark">☾</span>
+        <span class="theme-icon-light">☀</span>
+      </button>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu" aria-expanded="false">
+        <span class="menu-btn-text">MENU</span>
+        <div class="menu-burger" aria-hidden="true">
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+        </div>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════════
+     OVERLAY MENU
+══════════════════════════════════════════════════════════════ -->
+<nav class="overlay-menu" id="overlayMenu" aria-hidden="true">
+  <div class="menu-bg"></div>
+  <div class="menu-content container">
+    <div class="menu-grid">
+
+      <ul class="menu-links" role="list">
+        <li><a href="index.html"           class="menu-link">INICIO</a></li>
+        <li><a href="sobre-nosotros.html"  class="menu-link" style="color:var(--clr-turquesa)">SOBRE NOSOTROS</a></li>
+        <li><a href="servicios.html"       class="menu-link">SERVICIOS</a></li>
+        <li><a href="contacto.html"        class="menu-link">CONTACTO</a></li>
+      </ul>
+
+      <div class="menu-sidebar">
+        <div class="menu-logo-wrap">
+          <img src="Imagenes_pagina_inicio/KAUAI LOGO.png" alt="KAUAI Medios" class="menu-logo-img" />
+        </div>
+
+        <div class="menu-info">
+          <p class="menu-label">CONTÁCTANOS</p>
+          <a href="mailto:info@stotage.com" class="menu-email">info@stotage.com</a>
+          <p class="menu-phone">(809) 487 4714</p>
+        </div>
+        <div class="menu-info">
+          <p class="menu-label">REDES</p>
+          <div class="menu-socials">
+            <a href="#">INSTAGRAM</a>
+            <a href="#">LINKEDIN</a>
+            <a href="#">X / TWITTER</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     MAIN
+══════════════════════════════════════════════════════════════ -->
+<main class="main-wrapper" id="smooth-wrapper">
+  <div id="smooth-content">
+
+    <!-- §1 HERO -->
+    <section class="sn-hero" id="hero">
+      <div class="sn-hero-bg" aria-hidden="true">
+        <video autoplay loop muted playsinline>
+          <source src="Videos_pagina_inicio/Video_de_reunion_pagina_inicio.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="sn-hero-overlay"></div>
+      <div class="sn-hero-content container gsap-fade-up">
+        <span class="sn-hero-label">Sobre Nosotros</span>
+        <h1 class="sn-hero-title">
+          QUIÉNES<br>
+          <span class="outline">SOMOS</span>
+        </h1>
+        <p class="sn-hero-sub">7 años construyendo puentes entre marcas y audiencias en el Caribe y más allá.</p>
+      </div>
+    </section>
+
+    <!-- §2 MISIÓN + VISIÓN -->
+    <section class="sn-mv gsap-section" id="mision">
+      <div class="container">
+        <div class="sn-mv-grid">
+
+          <div class="gsap-fade-up">
+            <span class="label-tag" style="margin-bottom:2rem;display:block">NUESTRO PROPÓSITO</span>
+            <p class="sn-mv-statement">
+              TRANSFORMAMOS<br>
+              MEDIOS EN<br>
+              <span class="outline">RESULTADOS.</span>
+            </p>
+          </div>
+
+          <div class="sn-mv-cards gsap-fade-up">
+            <div class="sn-mv-card">
+              <span class="sn-mv-card-label">⊕ MISIÓN</span>
+              <p>Comercializar eventos masivos y programas de TV elevando el valor de la cultura dominicana y conectando marcas con audiencias de alto impacto.</p>
+            </div>
+            <div class="sn-mv-card">
+              <span class="sn-mv-card-label">◎ VISIÓN</span>
+              <p>Ser la empresa líder en comercialización de medios del Caribe, reconocida por nuestras alianzas estratégicas, creatividad y resultados comprobables.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- §3 TIMELINE -->
+    <section class="sn-timeline gsap-section" id="historia">
+      <div class="container">
+        <div class="section-header gsap-fade-up">
+          <span class="label-tag">NUESTRA HISTORIA</span>
+          <h2 class="section-title">EL CAMINO<br>RECORRIDO</h2>
+        </div>
+
+        <ul class="sn-timeline-list">
+          <li class="sn-tl-item gsap-fade-up">
+            <span class="sn-tl-year">2017</span>
+            <h3 class="sn-tl-title">FUNDACIÓN</h3>
+            <p class="sn-tl-desc">Nace KAUAI con la misión de transformar el mercado de medios dominicano, apostando por la calidad, la transparencia y las alianzas estratégicas.</p>
+          </li>
+          <li class="sn-tl-item gsap-fade-up">
+            <span class="sn-tl-year">2019</span>
+            <h3 class="sn-tl-title">PRIMER GRAN EVENTO</h3>
+            <p class="sn-tl-desc">Comercialización del mayor evento musical del año en República Dominicana. Más de 50 marcas patrocinadoras y alcance nacional en todos los medios.</p>
+          </li>
+          <li class="sn-tl-item gsap-fade-up">
+            <span class="sn-tl-year">2021</span>
+            <h3 class="sn-tl-title">EXPANSIÓN REGIONAL</h3>
+            <p class="sn-tl-desc">Consolidación de alianzas en Puerto Rico, Panamá y Colombia. El enfoque caribeño se convierte en nuestro sello diferenciador.</p>
+          </li>
+          <li class="sn-tl-item gsap-fade-up">
+            <span class="sn-tl-year">2024</span>
+            <h3 class="sn-tl-title">LIDERAZGO DIGITAL</h3>
+            <p class="sn-tl-desc">Integración de estrategias digitales, social media y presencia multiplataforma. Más del 60% de nuestros proyectos combinan medios tradicionales y digitales.</p>
+          </li>
+          <li class="sn-tl-item gsap-fade-up">
+            <span class="sn-tl-year">2026</span>
+            <h3 class="sn-tl-title">PRESENTE</h3>
+            <p class="sn-tl-desc">Referentes en comercialización de medios con más de 150 proyectos exitosos y un portafolio de marcas líderes en la región.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- §4 VALORES -->
+    <section class="sn-values gsap-section" id="valores">
+      <div class="container">
+        <div class="section-header gsap-fade-up">
+          <span class="label-tag">LO QUE NOS MUEVE</span>
+          <h2 class="section-title">NUESTROS<br>VALORES</h2>
+        </div>
+
+        <div class="sn-values-grid">
+          <div class="sn-val-card gsap-fade-up">
+            <span class="sn-val-num">01</span>
+            <h3 class="sn-val-title">INTEGRIDAD</h3>
+            <p class="sn-val-desc">Transparencia y honestidad en cada acuerdo, alianza y negociación. La confianza es nuestra activo más valioso.</p>
+          </div>
+          <div class="sn-val-card gsap-fade-up">
+            <span class="sn-val-num">02</span>
+            <h3 class="sn-val-title">INNOVACIÓN</h3>
+            <p class="sn-val-desc">Soluciones creativas para conectar marcas con audiencias en constante evolución. Nos adelantamos a las tendencias del mercado.</p>
+          </div>
+          <div class="sn-val-card gsap-fade-up">
+            <span class="sn-val-num">03</span>
+            <h3 class="sn-val-title">RESULTADOS</h3>
+            <p class="sn-val-desc">Cada estrategia se mide en impacto real y retorno comprobable. Prometemos lo que podemos cumplir y cumplimos lo que prometemos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §5 FOOTER CTA -->
+    <footer class="section-footer gsap-section" id="contact">
+      <div class="container">
+
+        <div class="footer-cta gsap-fade-up">
+          <p class="footer-eyebrow">¿LISTO PARA DAR EL SIGUIENTE PASO?</p>
+          <h2 class="footer-headline">
+            FORMA PARTE<br>
+            <span class="footer-headline-outline">DE LA HISTORIA.</span>
+          </h2>
+
+          <div class="magnetic-wrap" id="magneticWrap">
+            <a href="contacto.html" class="btn-magnetic" id="magneticBtn">
+              <span>CONTÁCTANOS</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-bottom gsap-fade-up">
+          <div class="footer-brand">
+            <span class="logo-k">K</span>
+            <p>KAUAI MEDIOS &<br>COMMUNICATIONS</p>
+          </div>
+
+          <div class="footer-links">
+            <a href="#">TWITTER(X)</a>
+            <a href="#">INSTAGRAM</a>
+            <a href="#">LINKEDIN</a>
+          </div>
+
+          <div class="footer-copy">
+            <p>©2026 KAUAI. DISEÑO DE VANGUARDIA.</p>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div><!-- /#smooth-content -->
+</main><!-- /#smooth-wrapper -->
+
+<!-- SCRIPTS -->
+<script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

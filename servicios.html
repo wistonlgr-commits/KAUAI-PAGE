@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es" class="lenis lenis-smooth dark-mode" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Servicios de KAUAI Medios — Compra de medios, estrategia, producción audiovisual, comercialización de eventos y consultoría estratégica." />
+  <title>Servicios — KAUAI Medios & Communications</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.0.45/dist/lenis.css">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* ─── PAGE-SPECIFIC: SERVICIOS ─── */
+
+    /* HERO */
+    .sv-hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: clamp(4rem, 8vw, 8rem);
+      overflow: hidden;
+    }
+    .sv-hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .sv-hero-bg video { width: 100%; height: 100%; object-fit: cover; }
+    .sv-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.65) 55%,
+        var(--bg-primary) 100%
+      );
+      z-index: 1;
+    }
+    .sv-hero-content { position: relative; z-index: 2; }
+    .sv-hero-title {
+      font-size: clamp(4rem, 12vw, 11rem);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      margin-bottom: 2rem;
+    }
+    .sv-hero-title .outline {
+      -webkit-text-stroke: 2px var(--txt-primary);
+      color: transparent;
+    }
+    .sv-hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      color: rgba(255,255,255,0.70);
+      max-width: 520px;
+      line-height: 1.5;
+    }
+
+    /* SERVICES LIST — extiende los estilos de .huge-list de index */
+    .sv-list-section {
+      padding: var(--pad-y-section) 0;
+      border-top: 1px solid var(--bdr-color);
+    }
+    .sv-huge-list {
+      list-style: none;
+      margin-top: 3rem;
+      border-top: 1px solid var(--bdr-color);
+    }
+    .sv-list-item {
+      display: grid;
+      grid-template-columns: 3rem 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      border-bottom: 1px solid var(--bdr-color);
+      padding: 2.5rem 0;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .sv-list-item:hover { background: rgba(255,255,255,0.02); }
+    .sv-item-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--clr-turquesa);
+    }
+    .sv-item-body { }
+    .sv-item-title {
+      font-size: clamp(1.6rem, 3.5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 0.6rem;
+      transition: color 0.3s;
+    }
+    .sv-list-item:hover .sv-item-title { color: var(--clr-turquesa); }
+    .sv-item-desc {
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      color: rgba(255,255,255,0.60);
+      line-height: 1.55;
+      max-width: 540px;
+    }
+    .sv-item-arrow {
+      font-size: 1.8rem;
+      color: rgba(255,255,255,0.25);
+      transition: color 0.3s, transform 0.3s;
+    }
+    .sv-list-item:hover .sv-item-arrow {
+      color: var(--clr-turquesa);
+      transform: translate(4px,-4px);
+    }
+
+    /* PROCESS STEPS */
+    .sv-process {
+      padding: var(--pad-y-section) 0;
+      border-top: 1px solid var(--bdr-color);
+    }
+    .sv-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 4rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .sv-step {
+      padding: 3rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      transition: background 0.4s;
+    }
+    .sv-step:last-child { border-right: none; }
+    .sv-step:hover { background: rgba(255,255,255,0.03); }
+    .sv-step-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--clr-turquesa);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 800;
+      color: var(--clr-turquesa);
+      margin-bottom: 1.5rem;
+    }
+    .sv-step-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .sv-step-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.60);
+      line-height: 1.6;
+    }
+
+    /* STATS */
+    .sv-stats {
+      padding: var(--pad-y-section) 0;
+      border-top: 1px solid var(--bdr-color);
+      background: linear-gradient(135deg,
+        rgba(85,0,170,0.12) 0%,
+        rgba(0,119,238,0.08) 50%,
+        rgba(0,199,199,0.06) 100%
+      );
+    }
+    .sv-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .sv-stat-item {
+      padding: 3rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+    }
+    .sv-stat-item:last-child { border-right: none; }
+    .sv-stat-num {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--clr-turquesa), var(--clr-azul));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .sv-stat-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .sv-steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .sv-step { border-right: 1px solid rgba(255,255,255,0.1) !important; }
+      .sv-stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .sv-stat-item { border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .sv-list-item { grid-template-columns: 2.5rem 1fr; }
+      .sv-item-arrow { display: none; }
+    }
+    @media (max-width: 600px) {
+      .sv-steps-grid { grid-template-columns: 1fr; }
+      .sv-stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .sv-hero-title { font-size: clamp(3rem, 14vw, 6rem); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="custom-cursor" id="customCursor"></div>
+
+<!-- HOVER REVEAL -->
+<div class="hover-reveal-container" id="hoverRevealContainer" aria-hidden="true">
+  <div class="hover-reveal-inner" id="hoverRevealInner">
+    <video class="hover-reveal-video" id="hoverRevealVideo" autoplay loop muted playsinline></video>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-link" aria-label="KAUAI Inicio">
+      <img
+        src="Imagenes_pagina_inicio/KAUAI LOGO.png"
+        alt="KAUAI Medios & Communications"
+        class="header-logo-img"
+      />
+    </a>
+
+    <div class="header-right">
+      <a href="mailto:info@stotage.com" class="header-contact hide-mobile">INFO@STOTAGE.COM</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema de color">
+        <span class="theme-icon-dark">☾</span>
+        <span class="theme-icon-light">☀</span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu" aria-expanded="false">
+        <span class="menu-btn-text">MENU</span>
+        <div class="menu-burger" aria-hidden="true">
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+        </div>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- OVERLAY MENU -->
+<nav class="overlay-menu" id="overlayMenu" aria-hidden="true">
+  <div class="menu-bg"></div>
+  <div class="menu-content container">
+    <div class="menu-grid">
+      <ul class="menu-links" role="list">
+        <li><a href="index.html"          class="menu-link">INICIO</a></li>
+        <li><a href="sobre-nosotros.html" class="menu-link">SOBRE NOSOTROS</a></li>
+        <li><a href="servicios.html"      class="menu-link" style="color:var(--clr-turquesa)">SERVICIOS</a></li>
+        <li><a href="contacto.html"       class="menu-link">CONTACTO</a></li>
+      </ul>
+      <div class="menu-sidebar">
+        <div class="menu-logo-wrap">
+          <img src="Imagenes_pagina_inicio/KAUAI LOGO.png" alt="KAUAI Medios" class="menu-logo-img" />
+        </div>
+        <div class="menu-info">
+          <p class="menu-label">CONTÁCTANOS</p>
+          <a href="mailto:info@stotage.com" class="menu-email">info@stotage.com</a>
+          <p class="menu-phone">(809) 487 4714</p>
+        </div>
+        <div class="menu-info">
+          <p class="menu-label">REDES</p>
+          <div class="menu-socials">
+            <a href="#">INSTAGRAM</a>
+            <a href="#">LINKEDIN</a>
+            <a href="#">X / TWITTER</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main-wrapper" id="smooth-wrapper">
+  <div id="smooth-content">
+
+    <!-- §1 HERO -->
+    <section class="sv-hero" id="hero">
+      <div class="sv-hero-bg" aria-hidden="true">
+        <video autoplay loop muted playsinline>
+          <source src="Videos_pagina_inicio/servicio-variedad.mp4.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="sv-hero-overlay"></div>
+      <div class="sv-hero-content container gsap-fade-up">
+        <span class="label-tag" style="margin-bottom:2rem;display:inline-block">Lo que hacemos</span>
+        <h1 class="sv-hero-title">
+          NUESTROS<br>
+          <span class="outline">SERVICIOS</span>
+        </h1>
+        <p class="sv-hero-sub">Soluciones integrales de medios para marcas que quieren trascender y conectar con audiencias reales.</p>
+      </div>
+    </section>
+
+    <!-- §2 LISTA DE SERVICIOS -->
+    <section class="sv-list-section gsap-section" id="lista">
+      <div class="container">
+        <div class="section-header gsap-fade-up">
+          <span class="label-tag">PORTAFOLIO COMPLETO</span>
+          <h2 class="section-title">TODO LO QUE<br>NECESITAS</h2>
+        </div>
+
+        <ul class="sv-huge-list">
+
+          <li class="sv-list-item gsap-fade-up video-hover-trigger"
+              data-video="Videos_pagina_inicio/servicio-variedad.mp4.mp4">
+            <span class="sv-item-num">01</span>
+            <div class="sv-item-body">
+              <h3 class="sv-item-title">COMPRA DE MEDIOS</h3>
+              <p class="sv-item-desc">Negociación experta en TV, Cable, Radio, Digital y Cine. Acceso preferencial a inventario premium con las mejores condiciones del mercado.</p>
+            </div>
+            <span class="sv-item-arrow">↗</span>
+          </li>
+
+          <li class="sv-list-item gsap-fade-up video-hover-trigger"
+              data-video="Videos_pagina_inicio/servicio-enfoque.mp4.mp4">
+            <span class="sv-item-num">02</span>
+            <div class="sv-item-body">
+              <h3 class="sv-item-title">ESTRATEGIA DE MEDIOS</h3>
+              <p class="sv-item-desc">Planificación basada en datos y comportamiento de audiencias para maximizar el ROI de cada campaña. Cada peso invertido tiene un propósito claro.</p>
+            </div>
+            <span class="sv-item-arrow">↗</span>
+          </li>
+
+          <li class="sv-list-item gsap-fade-up video-hover-trigger"
+              data-video="Videos_pagina_inicio/Video_de_reunion_pagina_inicio.mp4">
+            <span class="sv-item-num">03</span>
+            <div class="sv-item-body">
+              <h3 class="sv-item-title">PRODUCCIÓN AUDIOVISUAL</h3>
+              <p class="sv-item-desc">Contenido que conecta: spots publicitarios, docu-series, transmisiones en vivo y cobertura integral de eventos. Calidad broadcast sin compromiso.</p>
+            </div>
+            <span class="sv-item-arrow">↗</span>
+          </li>
+
+          <li class="sv-list-item gsap-fade-up video-hover-trigger"
+              data-video="Videos_pagina_inicio/servicio-alianza.mp4.mp4">
+            <span class="sv-item-num">04</span>
+            <div class="sv-item-body">
+              <h3 class="sv-item-title">COMERCIALIZACIÓN DE EVENTOS</h3>
+              <p class="sv-item-desc">Captación de patrocinios, venta de publicidad y monetización integral para eventos masivos. Convertimos audiencias en oportunidades de negocio.</p>
+            </div>
+            <span class="sv-item-arrow">↗</span>
+          </li>
+
+          <li class="sv-list-item gsap-fade-up video-hover-trigger"
+              data-video="Videos_pagina_inicio/servicio-enfoque.mp4.mp4">
+            <span class="sv-item-num">05</span>
+            <div class="sv-item-body">
+              <h3 class="sv-item-title">CONSULTORÍA ESTRATÉGICA</h3>
+              <p class="sv-item-desc">Diagnóstico comercial completo y roadmap de medios personalizado. No te damos un plan genérico: diseñamos la ruta exacta para tu marca.</p>
+            </div>
+            <span class="sv-item-arrow">↗</span>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- §3 PROCESO -->
+    <section class="sv-process gsap-section" id="proceso">
+      <div class="container">
+        <div class="section-header gsap-fade-up">
+          <span class="label-tag">METODOLOGÍA</span>
+          <h2 class="section-title">CÓMO<br>TRABAJAMOS</h2>
+        </div>
+
+        <div class="sv-steps-grid">
+          <div class="sv-step gsap-fade-up">
+            <div class="sv-step-num">01</div>
+            <h3 class="sv-step-title">ANÁLISIS</h3>
+            <p class="sv-step-desc">Entendemos tu negocio, audiencia y objetivos comerciales con profundidad. Sin diagnóstico real no hay estrategia real.</p>
+          </div>
+          <div class="sv-step gsap-fade-up">
+            <div class="sv-step-num">02</div>
+            <h3 class="sv-step-title">ESTRATEGIA</h3>
+            <p class="sv-step-desc">Diseñamos el plan de medios óptimo para tu presupuesto y objetivos. Cada decisión tiene una razón de ser cuantificable.</p>
+          </div>
+          <div class="sv-step gsap-fade-up">
+            <div class="sv-step-num">03</div>
+            <h3 class="sv-step-title">EJECUCIÓN</h3>
+            <p class="sv-step-desc">Negociamos y ejecutamos con precisión milimétrica. Nuestras relaciones con los medios garantizan condiciones preferenciales.</p>
+          </div>
+          <div class="sv-step gsap-fade-up">
+            <div class="sv-step-num">04</div>
+            <h3 class="sv-step-title">RESULTADOS</h3>
+            <p class="sv-step-desc">Medimos el impacto en tiempo real y optimizamos continuamente. Los números son la única manera de saber si funcionó.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §4 STATS -->
+    <section class="sv-stats gsap-section" id="stats">
+      <div class="container">
+        <div class="sv-stats-grid">
+          <div class="sv-stat-item gsap-fade-up">
+            <span class="sv-stat-num">7+</span>
+            <span class="sv-stat-label">Años de Experiencia</span>
+          </div>
+          <div class="sv-stat-item gsap-fade-up">
+            <span class="sv-stat-num">150+</span>
+            <span class="sv-stat-label">Proyectos Exitosos</span>
+          </div>
+          <div class="sv-stat-item gsap-fade-up">
+            <span class="sv-stat-num">98%</span>
+            <span class="sv-stat-label">Satisfacción de Clientes</span>
+          </div>
+          <div class="sv-stat-item gsap-fade-up">
+            <span class="sv-stat-num">5</span>
+            <span class="sv-stat-label">Categorías de Medios</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §5 FOOTER CTA -->
+    <footer class="section-footer gsap-section" id="contact">
+      <div class="container">
+
+        <div class="footer-cta gsap-fade-up">
+          <p class="footer-eyebrow">¿TIENES UN PROYECTO EN MENTE?</p>
+          <h2 class="footer-headline">
+            HABLEMOS DE<br>
+            <span class="footer-headline-outline">TU PROYECTO.</span>
+          </h2>
+
+          <div class="magnetic-wrap" id="magneticWrap">
+            <a href="contacto.html" class="btn-magnetic" id="magneticBtn">
+              <span>CONTÁCTANOS</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-bottom gsap-fade-up">
+          <div class="footer-brand">
+            <span class="logo-k">K</span>
+            <p>KAUAI MEDIOS &<br>COMMUNICATIONS</p>
+          </div>
+          <div class="footer-links">
+            <a href="#">TWITTER(X)</a>
+            <a href="#">INSTAGRAM</a>
+            <a href="#">LINKEDIN</a>
+          </div>
+          <div class="footer-copy">
+            <p>©2026 KAUAI. DISEÑO DE VANGUARDIA.</p>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div><!-- /#smooth-content -->
+</main><!-- /#smooth-wrapper -->
+
+<!-- SCRIPTS -->
+<script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

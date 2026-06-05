@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es" class="lenis lenis-smooth dark-mode" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contáctanos — KAUAI Medios & Communications. Cuéntanos tu proyecto y te respondemos en menos de 24 horas." />
+  <title>Contacto — KAUAI Medios & Communications</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.0.45/dist/lenis.css">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* ─── PAGE-SPECIFIC: CONTACTO ─── */
+
+    /* HERO */
+    .ct-hero {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: clamp(4rem, 8vw, 7rem);
+      overflow: hidden;
+      /* Gradiente de marca */
+      background: linear-gradient(
+        135deg,
+        #3d0085 0%,
+        #0055cc 45%,
+        #007baa 75%,
+        #00C7C7 100%
+      );
+    }
+    /* Grain texture overlay for premium feel */
+    .ct-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1;
+      opacity: 0.35;
+    }
+    .ct-hero-bottom-fade {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 35%;
+      background: linear-gradient(to bottom, transparent, var(--bg-primary));
+      z-index: 2;
+    }
+    .ct-hero-content {
+      position: relative;
+      z-index: 3;
+    }
+    .ct-hero-title {
+      font-size: clamp(3.5rem, 10vw, 9.5rem);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      color: #fff;
+      margin-bottom: 1.75rem;
+    }
+    .ct-hero-title .outline {
+      -webkit-text-stroke: 2px #fff;
+      color: transparent;
+    }
+    .ct-hero-sub {
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      color: rgba(255,255,255,0.80);
+      max-width: 480px;
+      line-height: 1.55;
+      margin-bottom: 2.5rem;
+    }
+    .ct-hero-pills {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .ct-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.5rem;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #fff;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.10);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .ct-pill:hover {
+      background: rgba(255,255,255,0.20);
+      border-color: rgba(255,255,255,0.7);
+    }
+    .ct-pill-icon { font-size: 1rem; }
+
+    /* CONTACT LAYOUT */
+    .ct-layout-section {
+      padding: var(--pad-y-section) 0;
+      border-top: 1px solid var(--bdr-color);
+    }
+    .ct-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 6vw;
+      align-items: start;
+    }
+
+    /* FORM */
+    .ct-form-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 2.5rem;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .form-group label {
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--clr-turquesa);
+      text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--txt-primary);
+      padding: 1rem 1.25rem;
+      font-family: var(--font-main);
+      font-size: 1rem;
+      border-radius: 10px;
+      transition: border-color 0.3s, background 0.3s;
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255,255,255,0.30);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--clr-turquesa);
+      background: rgba(0,199,199,0.04);
+    }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300C7C7' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.25rem center;
+      padding-right: 3rem;
+      cursor: pointer;
+    }
+    .form-group select option {
+      background: #111;
+      color: #fff;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 145px;
+      line-height: 1.5;
+    }
+    .form-submit {
+      background: linear-gradient(135deg, var(--clr-azul), var(--clr-turquesa));
+      color: #fff;
+      border: none;
+      padding: 1.2rem 2.5rem;
+      font-family: var(--font-main);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      border-radius: 10px;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: opacity 0.3s, transform 0.25s;
+      text-transform: uppercase;
+    }
+    .form-submit:hover {
+      opacity: 0.88;
+      transform: translateY(-2px);
+    }
+    .form-submit:active { transform: translateY(0); }
+
+    /* CONTACT INFO */
+    .ct-info-sticky {
+      position: sticky;
+      top: 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    .ct-info-item h4 {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: var(--clr-turquesa);
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+    }
+    .ct-info-item p,
+    .ct-info-item a {
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: block;
+      color: var(--txt-primary);
+      line-height: 1.5;
+    }
+    .ct-info-item a:hover { color: var(--clr-turquesa); }
+    .ct-info-socials {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .ct-info-markets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+    }
+    .ct-market-tag {
+      padding: 0.3rem 0.9rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.65);
+    }
+    .ct-quote {
+      padding: 2rem;
+      border-left: 3px solid var(--clr-turquesa);
+      background: rgba(0,199,199,0.04);
+      border-radius: 0 10px 10px 0;
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+      font-weight: 800;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .ct-layout { grid-template-columns: 1fr; }
+      .ct-info-sticky { position: static; }
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .ct-hero-title { font-size: clamp(3rem, 12vw, 5.5rem); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="custom-cursor" id="customCursor"></div>
+
+<!-- HOVER REVEAL (requerido por main.js) -->
+<div class="hover-reveal-container" id="hoverRevealContainer" aria-hidden="true">
+  <div class="hover-reveal-inner" id="hoverRevealInner">
+    <video class="hover-reveal-video" id="hoverRevealVideo" autoplay loop muted playsinline></video>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-link" aria-label="KAUAI Inicio">
+      <img
+        src="Imagenes_pagina_inicio/KAUAI LOGO.png"
+        alt="KAUAI Medios & Communications"
+        class="header-logo-img"
+      />
+    </a>
+
+    <div class="header-right">
+      <a href="mailto:info@stotage.com" class="header-contact hide-mobile">INFO@STOTAGE.COM</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema de color">
+        <span class="theme-icon-dark">☾</span>
+        <span class="theme-icon-light">☀</span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu" aria-expanded="false">
+        <span class="menu-btn-text">MENU</span>
+        <div class="menu-burger" aria-hidden="true">
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+        </div>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- OVERLAY MENU -->
+<nav class="overlay-menu" id="overlayMenu" aria-hidden="true">
+  <div class="menu-bg"></div>
+  <div class="menu-content container">
+    <div class="menu-grid">
+      <ul class="menu-links" role="list">
+        <li><a href="index.html"          class="menu-link">INICIO</a></li>
+        <li><a href="sobre-nosotros.html" class="menu-link">SOBRE NOSOTROS</a></li>
+        <li><a href="servicios.html"      class="menu-link">SERVICIOS</a></li>
+        <li><a href="contacto.html"       class="menu-link" style="color:var(--clr-turquesa)">CONTACTO</a></li>
+      </ul>
+      <div class="menu-sidebar">
+        <div class="menu-logo-wrap">
+          <img src="Imagenes_pagina_inicio/KAUAI LOGO.png" alt="KAUAI Medios" class="menu-logo-img" />
+        </div>
+        <div class="menu-info">
+          <p class="menu-label">CONTÁCTANOS</p>
+          <a href="mailto:info@stotage.com" class="menu-email">info@stotage.com</a>
+          <p class="menu-phone">(809) 487 4714</p>
+        </div>
+        <div class="menu-info">
+          <p class="menu-label">REDES</p>
+          <div class="menu-socials">
+            <a href="#">INSTAGRAM</a>
+            <a href="#">LINKEDIN</a>
+            <a href="#">X / TWITTER</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main-wrapper" id="smooth-wrapper">
+  <div id="smooth-content">
+
+    <!-- §1 HERO -->
+    <section class="ct-hero" id="hero">
+      <div class="ct-hero-bottom-fade"></div>
+      <div class="ct-hero-content container gsap-fade-up">
+        <span class="label-tag" style="margin-bottom:2rem;display:inline-block;border-color:rgba(255,255,255,0.4);color:#fff">Contáctanos</span>
+        <h1 class="ct-hero-title">
+          HAGAMOS<br>
+          <span class="outline">ALGO GRANDE.</span>
+        </h1>
+        <p class="ct-hero-sub">Cuéntanos tu proyecto y te respondemos en menos de 24 horas. Siempre.</p>
+        <div class="ct-hero-pills">
+          <a href="mailto:info@stotage.com" class="ct-pill">
+            <span class="ct-pill-icon">✉</span>
+            info@stotage.com
+          </a>
+          <a href="tel:8094874714" class="ct-pill">
+            <span class="ct-pill-icon">☎</span>
+            (809) 487-4714
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- §2 FORM + INFO -->
+    <section class="ct-layout-section gsap-section" id="formulario">
+      <div class="container">
+        <div class="ct-layout">
+
+          <!-- FORMULARIO -->
+          <div class="gsap-fade-up">
+            <h2 class="ct-form-title">ESCRÍBENOS</h2>
+            <form class="contact-form" id="contactForm" novalidate>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="nombre">Nombre *</label>
+                  <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required />
+                </div>
+                <div class="form-group">
+                  <label for="empresa">Empresa</label>
+                  <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="tu@correo.com" required />
+              </div>
+
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="(809) XXX-XXXX" />
+              </div>
+
+              <div class="form-group">
+                <label for="tipo">Tipo de proyecto</label>
+                <select id="tipo" name="tipo">
+                  <option value="">Selecciona una categoría</option>
+                  <option value="compra">Compra de Medios</option>
+                  <option value="produccion">Producción Audiovisual</option>
+                  <option value="eventos">Comercialización de Eventos</option>
+                  <option value="consultoria">Consultoría Estratégica</option>
+                  <option value="otro">Otro</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="mensaje">Mensaje *</label>
+                <textarea id="mensaje" name="mensaje" rows="5"
+                  placeholder="Cuéntanos sobre tu proyecto, objetivos y cualquier detalle que consideres relevante..." required></textarea>
+              </div>
+
+              <button type="submit" class="form-submit" id="formSubmitBtn">
+                ENVIAR MENSAJE →
+              </button>
+
+            </form>
+          </div>
+
+          <!-- INFO -->
+          <div class="ct-info-sticky gsap-fade-up">
+
+            <div class="ct-info-item">
+              <h4>Email</h4>
+              <a href="mailto:info@stotage.com">info@stotage.com</a>
+            </div>
+
+            <div class="ct-info-item">
+              <h4>Teléfono</h4>
+              <a href="tel:8094874714">(809) 487-4714</a>
+            </div>
+
+            <div class="ct-info-item">
+              <h4>Redes Sociales</h4>
+              <div class="ct-info-socials">
+                <a href="#">↗ Instagram</a>
+                <a href="#">↗ LinkedIn</a>
+                <a href="#">↗ X / Twitter</a>
+              </div>
+            </div>
+
+            <div class="ct-info-item">
+              <h4>Mercados</h4>
+              <div class="ct-info-markets">
+                <span class="ct-market-tag">República Dominicana</span>
+                <span class="ct-market-tag">Puerto Rico</span>
+                <span class="ct-market-tag">Panamá</span>
+                <span class="ct-market-tag">Colombia</span>
+                <span class="ct-market-tag">Caribe</span>
+              </div>
+            </div>
+
+            <blockquote class="ct-quote">
+              "Respondemos en menos de 24 horas. Siempre."
+            </blockquote>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §3 FOOTER CTA -->
+    <footer class="section-footer gsap-section" id="contact">
+      <div class="container">
+
+        <div class="footer-cta gsap-fade-up">
+          <p class="footer-eyebrow">¿YA LO DECIDISTE?</p>
+          <h2 class="footer-headline">
+            LISTOS PARA<br>
+            <span class="footer-headline-outline">TRABAJAR.</span>
+          </h2>
+
+          <div class="magnetic-wrap" id="magneticWrap">
+            <a href="mailto:info@stotage.com" class="btn-magnetic" id="magneticBtn">
+              <span>ESCRÍBENOS</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-bottom gsap-fade-up">
+          <div class="footer-brand">
+            <span class="logo-k">K</span>
+            <p>KAUAI MEDIOS &<br>COMMUNICATIONS</p>
+          </div>
+          <div class="footer-links">
+            <a href="#">TWITTER(X)</a>
+            <a href="#">INSTAGRAM</a>
+            <a href="#">LINKEDIN</a>
+          </div>
+          <div class="footer-copy">
+            <p>©2026 KAUAI. DISEÑO DE VANGUARDIA.</p>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div><!-- /#smooth-content -->
+</main><!-- /#smooth-wrapper -->
+
+<!-- SCRIPTS -->
+<script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+
+<!-- FORM HANDLER -->
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('formSubmitBtn');
+    const originalText = btn.textContent;
+
+    // Validate required fields
+    const nombre  = document.getElementById('nombre').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
+
+    if (!nombre || !email || !mensaje) {
+      btn.textContent = 'COMPLETA LOS CAMPOS REQUERIDOS';
+      btn.style.background = 'rgba(255,60,60,0.7)';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+      }, 2500);
+      return;
+    }
+
+    // Success state
+    btn.textContent = '¡ENVIADO! ✓';
+    btn.style.background = 'linear-gradient(135deg, #00C7C7, #0077EE)';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 3500);
+  });
+</script>
+
+</body>
+</html>
