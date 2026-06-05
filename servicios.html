@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="lenis lenis-smooth dark-mode" data-theme="dark">
+<html lang="es" class="lenis lenis-smooth light-mode" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,16 +12,20 @@
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.0.45/dist/lenis.css">
   <link rel="stylesheet" href="css/styles.css" />
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Imagenes_pagina_inicio/LOGO_PESTA;A.png" />
+
   <style>
     /* ─── PAGE-SPECIFIC: SERVICIOS ─── */
 
     /* HERO */
     .sv-hero {
       position: relative;
-      min-height: 90vh;
+      min-height: 92vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
+      padding-top: calc(var(--header-height) + clamp(3rem, 5vw, 5rem));
       padding-bottom: clamp(4rem, 8vw, 8rem);
       overflow: hidden;
     }
@@ -31,27 +35,28 @@
       position: absolute; inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.2) 0%,
-        rgba(0,0,0,0.65) 55%,
-        var(--bg-primary) 100%
+        rgba(0,0,0,0.60) 0%,
+        rgba(0,0,0,0.75) 60%,
+        rgba(10,10,10,1) 100%
       );
       z-index: 1;
     }
     .sv-hero-content { position: relative; z-index: 2; }
     .sv-hero-title {
-      font-size: clamp(4rem, 12vw, 11rem);
+      font-size: clamp(3rem, 10vw, 11rem);
       font-weight: 900;
       line-height: 0.92;
       letter-spacing: -0.04em;
+      color: #ffffff;
       margin-bottom: 2rem;
     }
     .sv-hero-title .outline {
-      -webkit-text-stroke: 2px var(--txt-primary);
+      -webkit-text-stroke: 2px #ffffff;
       color: transparent;
     }
     .sv-hero-sub {
       font-size: clamp(1rem, 1.8vw, 1.3rem);
-      color: rgba(255,255,255,0.70);
+      color: var(--txt-secondary);
       max-width: 520px;
       line-height: 1.5;
     }
@@ -76,7 +81,7 @@
       transition: background 0.3s;
       cursor: default;
     }
-    .sv-list-item:hover { background: rgba(255,255,255,0.02); }
+    .sv-list-item:hover { background: var(--bg-secondary); }
     .sv-item-num {
       font-size: 0.7rem;
       font-weight: 700;
@@ -95,13 +100,13 @@
     .sv-list-item:hover .sv-item-title { color: var(--clr-turquesa); }
     .sv-item-desc {
       font-size: clamp(0.85rem, 1.2vw, 1rem);
-      color: rgba(255,255,255,0.60);
+      color: var(--txt-secondary);
       line-height: 1.55;
       max-width: 540px;
     }
     .sv-item-arrow {
       font-size: 1.8rem;
-      color: rgba(255,255,255,0.25);
+      color: var(--txt-tertiary);
       transition: color 0.3s, transform 0.3s;
     }
     .sv-list-item:hover .sv-item-arrow {
@@ -119,16 +124,16 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 0;
       margin-top: 4rem;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid var(--bdr-color);
     }
     .sv-step {
       padding: 3rem 2rem;
-      border-right: 1px solid rgba(255,255,255,0.1);
+      border-right: 1px solid var(--bdr-color);
       position: relative;
       transition: background 0.4s;
     }
     .sv-step:last-child { border-right: none; }
-    .sv-step:hover { background: rgba(255,255,255,0.03); }
+    .sv-step:hover { background: var(--bg-secondary); }
     .sv-step-num {
       width: 48px; height: 48px;
       border-radius: 50%;
@@ -146,7 +151,7 @@
     }
     .sv-step-desc {
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.60);
+      color: var(--txt-secondary);
       line-height: 1.6;
     }
 
@@ -154,11 +159,6 @@
     .sv-stats {
       padding: var(--pad-y-section) 0;
       border-top: 1px solid var(--bdr-color);
-      background: linear-gradient(135deg,
-        rgba(85,0,170,0.12) 0%,
-        rgba(0,119,238,0.08) 50%,
-        rgba(0,199,199,0.06) 100%
-      );
     }
     .sv-stats-grid {
       display: grid;
@@ -167,7 +167,7 @@
     }
     .sv-stat-item {
       padding: 3rem 2rem;
-      border-right: 1px solid rgba(255,255,255,0.08);
+      border-right: 1px solid var(--bdr-color);
       text-align: center;
     }
     .sv-stat-item:last-child { border-right: none; }
@@ -186,23 +186,29 @@
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.55);
+      color: var(--txt-secondary);
       text-transform: uppercase;
     }
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .sv-steps-grid { grid-template-columns: repeat(2, 1fr); }
-      .sv-step { border-right: 1px solid rgba(255,255,255,0.1) !important; }
+      .sv-step { border-right: 1px solid var(--bdr-color) !important; border-bottom: 1px solid var(--bdr-color); }
       .sv-stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .sv-stat-item { border-bottom: 1px solid rgba(255,255,255,0.08); }
-      .sv-list-item { grid-template-columns: 2.5rem 1fr; }
+      .sv-stat-item { border-bottom: 1px solid var(--bdr-color); border-right: 1px solid var(--bdr-color); }
+      .sv-list-item { grid-template-columns: 2.5rem 1fr; padding: 2rem 0; }
       .sv-item-arrow { display: none; }
+      .sv-item-title { font-size: clamp(1.4rem, 5vw, 2.2rem); }
     }
     @media (max-width: 600px) {
+      .sv-hero { min-height: 85vh; padding-bottom: 3rem; justify-content: center; }
       .sv-steps-grid { grid-template-columns: 1fr; }
+      .sv-step { border-right: none !important; }
       .sv-stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .sv-hero-title { font-size: clamp(3rem, 14vw, 6rem); }
+      .sv-hero-title { font-size: clamp(2.8rem, 13vw, 4rem); margin-bottom: 1rem; letter-spacing: -0.03em; }
+      .sv-item-title { font-size: clamp(1.2rem, 6vw, 1.8rem); }
+      .sv-item-desc { font-size: 0.85rem; }
+      .sv-list-item { padding: 1.5rem 0; gap: 1rem; }
     }
   </style>
 </head>
@@ -221,7 +227,7 @@
 <!-- HEADER -->
 <header class="header" id="header">
   <div class="container header-inner">
-    <a href="index.html" class="logo-link" aria-label="KAUAI Inicio">
+    <a href="/" class="logo-link" aria-label="KAUAI Inicio">
       <img
         src="Imagenes_pagina_inicio/KAUAI LOGO.png"
         alt="KAUAI Medios & Communications"
@@ -230,7 +236,7 @@
     </a>
 
     <div class="header-right">
-      <a href="mailto:info@stotage.com" class="header-contact hide-mobile">INFO@STOTAGE.COM</a>
+      <a href="mailto:info@kauai.com" class="header-contact hide-mobile">INFO@KAUAI.COM</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema de color">
         <span class="theme-icon-dark">☾</span>
         <span class="theme-icon-light">☀</span>
@@ -252,10 +258,10 @@
   <div class="menu-content container">
     <div class="menu-grid">
       <ul class="menu-links" role="list">
-        <li><a href="index.html"          class="menu-link">INICIO</a></li>
-        <li><a href="sobre-nosotros.html" class="menu-link">SOBRE NOSOTROS</a></li>
-        <li><a href="servicios.html"      class="menu-link" style="color:var(--clr-turquesa)">SERVICIOS</a></li>
-        <li><a href="contacto.html"       class="menu-link">CONTACTO</a></li>
+        <li><a href="/"          class="menu-link">INICIO</a></li>
+        <li><a href="/sobre-nosotros" class="menu-link">SOBRE NOSOTROS</a></li>
+        <li><a href="/servicios"      class="menu-link" style="color:var(--clr-turquesa)">SERVICIOS</a></li>
+        <li><a href="/contacto"       class="menu-link">CONTACTO</a></li>
       </ul>
       <div class="menu-sidebar">
         <div class="menu-logo-wrap">
@@ -263,7 +269,7 @@
         </div>
         <div class="menu-info">
           <p class="menu-label">CONTÁCTANOS</p>
-          <a href="mailto:info@stotage.com" class="menu-email">info@stotage.com</a>
+          <a href="mailto:info@kauai.com" class="menu-email">info@kauai.com</a>
           <p class="menu-phone">(809) 487 4714</p>
         </div>
         <div class="menu-info">
@@ -292,7 +298,7 @@
       </div>
       <div class="sv-hero-overlay"></div>
       <div class="sv-hero-content container gsap-fade-up">
-        <span class="label-tag" style="margin-bottom:2rem;display:inline-block">Lo que hacemos</span>
+        <span class="label-tag" style="margin-bottom:0.5rem;display:inline-block">Lo que hacemos</span>
         <h1 class="sv-hero-title">
           NUESTROS<br>
           <span class="outline">SERVICIOS</span>
@@ -302,7 +308,7 @@
     </section>
 
     <!-- §2 LISTA DE SERVICIOS -->
-    <section class="sv-list-section gsap-section" id="lista">
+    <section class="sv-list-section gsap-section" id="lista" style="background-color: var(--bg-secondary);">
       <div class="container">
         <div class="section-header gsap-fade-up">
           <span class="label-tag">PORTAFOLIO COMPLETO</span>
@@ -366,7 +372,7 @@
     </section>
 
     <!-- §3 PROCESO -->
-    <section class="sv-process gsap-section" id="proceso">
+    <section class="sv-process gsap-section" id="proceso" style="background-color: var(--bg-primary);">
       <div class="container">
         <div class="section-header gsap-fade-up">
           <span class="label-tag">METODOLOGÍA</span>
@@ -399,7 +405,7 @@
     </section>
 
     <!-- §4 STATS -->
-    <section class="sv-stats gsap-section" id="stats">
+    <section class="sv-stats gsap-section" id="stats" style="background-color: var(--bg-secondary);">
       <div class="container">
         <div class="sv-stats-grid">
           <div class="sv-stat-item gsap-fade-up">
@@ -434,7 +440,7 @@
           </h2>
 
           <div class="magnetic-wrap" id="magneticWrap">
-            <a href="contacto.html" class="btn-magnetic" id="magneticBtn">
+            <a href="/contacto" class="magnetic-btn" id="magneticBtn">
               <span>CONTÁCTANOS</span>
             </a>
           </div>
@@ -451,7 +457,7 @@
             <a href="#">LINKEDIN</a>
           </div>
           <div class="footer-copy">
-            <p>©2026 KAUAI. DISEÑO DE VANGUARDIA.</p>
+            <p>©2026 KAUAI MEDIOS. Todos los derechos reservados. <span class="hide-mobile">&nbsp;|&nbsp;</span> Diseño y desarrollo por Vission Solutions.</p>
           </div>
         </div>
 

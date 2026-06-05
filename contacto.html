@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="lenis lenis-smooth dark-mode" data-theme="dark">
+<html lang="es" class="lenis lenis-smooth light-mode" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,16 +12,20 @@
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.0.45/dist/lenis.css">
   <link rel="stylesheet" href="css/styles.css" />
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Imagenes_pagina_inicio/LOGO_PESTA;A.png" />
+
   <style>
     /* ─── PAGE-SPECIFIC: CONTACTO ─── */
 
     /* HERO */
     .ct-hero {
       position: relative;
-      min-height: 70vh;
+      min-height: 88vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
+      padding-top: calc(var(--header-height) + clamp(3rem, 5vw, 5rem));
       padding-bottom: clamp(4rem, 8vw, 7rem);
       overflow: hidden;
       /* Gradiente de marca */
@@ -139,8 +143,8 @@
     .form-group input,
     .form-group select,
     .form-group textarea {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.12);
+      background: var(--bg-secondary);
+      border: 1px solid var(--bdr-color);
       color: var(--txt-primary);
       padding: 1rem 1.25rem;
       font-family: var(--font-main);
@@ -155,7 +159,7 @@
     }
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-      color: rgba(255,255,255,0.30);
+      color: var(--txt-tertiary);
     }
     .form-group input:focus,
     .form-group select:focus,
@@ -171,8 +175,8 @@
       cursor: pointer;
     }
     .form-group select option {
-      background: #111;
-      color: #fff;
+      background: var(--bg-primary);
+      color: var(--txt-primary);
     }
     .form-group textarea {
       resize: vertical;
@@ -238,33 +242,40 @@
     }
     .ct-market-tag {
       padding: 0.3rem 0.9rem;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid var(--bdr-color);
       border-radius: 100px;
       font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: 0.05em;
-      color: rgba(255,255,255,0.65);
+      color: var(--txt-secondary);
     }
     .ct-quote {
       padding: 2rem;
       border-left: 3px solid var(--clr-turquesa);
-      background: rgba(0,199,199,0.04);
+      background: var(--bg-secondary);
       border-radius: 0 10px 10px 0;
       font-size: clamp(1.1rem, 1.8vw, 1.4rem);
       font-weight: 800;
       line-height: 1.3;
       letter-spacing: -0.02em;
-      color: rgba(255,255,255,0.9);
+      color: var(--txt-primary);
     }
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .ct-layout { grid-template-columns: 1fr; }
       .ct-info-sticky { position: static; }
+      .ct-hero-title { font-size: clamp(2.8rem, 10vw, 5rem); }
     }
     @media (max-width: 600px) {
-      .form-row { grid-template-columns: 1fr; }
-      .ct-hero-title { font-size: clamp(3rem, 12vw, 5.5rem); }
+      .ct-hero { min-height: 75vh; padding-bottom: 2.5rem; justify-content: center; }
+      .form-row { grid-template-columns: 1fr; gap: 1rem; }
+      .ct-hero-title { font-size: clamp(2.4rem, 12vw, 3.5rem); line-height: 0.95; }
+      .ct-hero-pills { gap: 0.6rem; }
+      .ct-pill { padding: 0.6rem 1rem; font-size: 0.75rem; }
+      .ct-form-title { font-size: 1.6rem; }
+      .ct-info-markets { gap: 0.4rem; }
+      .form-submit { width: 100%; text-align: center; align-self: stretch; }
     }
   </style>
 </head>
@@ -283,7 +294,7 @@
 <!-- HEADER -->
 <header class="header" id="header">
   <div class="container header-inner">
-    <a href="index.html" class="logo-link" aria-label="KAUAI Inicio">
+    <a href="/" class="logo-link" aria-label="KAUAI Inicio">
       <img
         src="Imagenes_pagina_inicio/KAUAI LOGO.png"
         alt="KAUAI Medios & Communications"
@@ -292,7 +303,7 @@
     </a>
 
     <div class="header-right">
-      <a href="mailto:info@stotage.com" class="header-contact hide-mobile">INFO@STOTAGE.COM</a>
+      <a href="mailto:info@kauai.com" class="header-contact hide-mobile">INFO@KAUAI.COM</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema de color">
         <span class="theme-icon-dark">☾</span>
         <span class="theme-icon-light">☀</span>
@@ -314,10 +325,10 @@
   <div class="menu-content container">
     <div class="menu-grid">
       <ul class="menu-links" role="list">
-        <li><a href="index.html"          class="menu-link">INICIO</a></li>
-        <li><a href="sobre-nosotros.html" class="menu-link">SOBRE NOSOTROS</a></li>
-        <li><a href="servicios.html"      class="menu-link">SERVICIOS</a></li>
-        <li><a href="contacto.html"       class="menu-link" style="color:var(--clr-turquesa)">CONTACTO</a></li>
+        <li><a href="/"          class="menu-link">INICIO</a></li>
+        <li><a href="/sobre-nosotros" class="menu-link">SOBRE NOSOTROS</a></li>
+        <li><a href="/servicios"      class="menu-link">SERVICIOS</a></li>
+        <li><a href="/contacto"       class="menu-link" style="color:var(--clr-turquesa)">CONTACTO</a></li>
       </ul>
       <div class="menu-sidebar">
         <div class="menu-logo-wrap">
@@ -325,7 +336,7 @@
         </div>
         <div class="menu-info">
           <p class="menu-label">CONTÁCTANOS</p>
-          <a href="mailto:info@stotage.com" class="menu-email">info@stotage.com</a>
+          <a href="mailto:info@kauai.com" class="menu-email">info@kauai.com</a>
           <p class="menu-phone">(809) 487 4714</p>
         </div>
         <div class="menu-info">
@@ -349,16 +360,16 @@
     <section class="ct-hero" id="hero">
       <div class="ct-hero-bottom-fade"></div>
       <div class="ct-hero-content container gsap-fade-up">
-        <span class="label-tag" style="margin-bottom:2rem;display:inline-block;border-color:rgba(255,255,255,0.4);color:#fff">Contáctanos</span>
+        <span class="label-tag" style="margin-bottom:0.5rem;display:inline-block;border-color:rgba(255,255,255,0.4);color:#fff">Contáctanos</span>
         <h1 class="ct-hero-title">
           HAGAMOS<br>
           <span class="outline">ALGO GRANDE.</span>
         </h1>
         <p class="ct-hero-sub">Cuéntanos tu proyecto y te respondemos en menos de 24 horas. Siempre.</p>
         <div class="ct-hero-pills">
-          <a href="mailto:info@stotage.com" class="ct-pill">
+          <a href="mailto:info@kauai.com" class="ct-pill">
             <span class="ct-pill-icon">✉</span>
-            info@stotage.com
+            info@kauai.com
           </a>
           <a href="tel:8094874714" class="ct-pill">
             <span class="ct-pill-icon">☎</span>
@@ -429,7 +440,7 @@
 
             <div class="ct-info-item">
               <h4>Email</h4>
-              <a href="mailto:info@stotage.com">info@stotage.com</a>
+              <a href="mailto:info@kauai.com">info@kauai.com</a>
             </div>
 
             <div class="ct-info-item">
@@ -472,13 +483,9 @@
 
         <div class="footer-cta gsap-fade-up">
           <p class="footer-eyebrow">¿YA LO DECIDISTE?</p>
-          <h2 class="footer-headline">
-            LISTOS PARA<br>
-            <span class="footer-headline-outline">TRABAJAR.</span>
-          </h2>
-
+          <h2 class="footer-headline">LISTOS PARA<br><span class="footer-headline-outline">TRABAJAR.</span></h2>
           <div class="magnetic-wrap" id="magneticWrap">
-            <a href="mailto:info@stotage.com" class="btn-magnetic" id="magneticBtn">
+            <a href="mailto:info@kauai.com" class="magnetic-btn" id="magneticBtn">
               <span>ESCRÍBENOS</span>
             </a>
           </div>
@@ -495,7 +502,7 @@
             <a href="#">LINKEDIN</a>
           </div>
           <div class="footer-copy">
-            <p>©2026 KAUAI. DISEÑO DE VANGUARDIA.</p>
+            <p>©2026 KAUAI MEDIOS. Todos los derechos reservados. <span class="hide-mobile">&nbsp;|&nbsp;</span> Diseño y desarrollo por Vission Solutions.</p>
           </div>
         </div>
 

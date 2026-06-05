@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="lenis lenis-smooth dark-mode" data-theme="dark">
+<html lang="es" class="lenis lenis-smooth light-mode" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,16 +12,20 @@
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.0.45/dist/lenis.css">
   <link rel="stylesheet" href="css/styles.css" />
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Imagenes_pagina_inicio/LOGO_PESTA;A.png" />
+
   <style>
     /* ─── PAGE-SPECIFIC: SOBRE NOSOTROS ─── */
 
     /* HERO */
     .sn-hero {
       position: relative;
-      min-height: 90vh;
+      min-height: 92vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
+      padding-top: calc(var(--header-height) + clamp(3rem, 5vw, 5rem));
       padding-bottom: clamp(4rem, 8vw, 8rem);
       overflow: hidden;
     }
@@ -38,9 +42,9 @@
       position: absolute; inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.25) 0%,
-        rgba(0,0,0,0.70) 60%,
-        var(--bg-primary) 100%
+        rgba(0,0,0,0.50) 0%,
+        rgba(0,0,0,0.72) 55%,
+        rgba(10,10,10,1)  100%
       );
       z-index: 1;
     }
@@ -57,24 +61,24 @@
       border: 1px solid var(--clr-turquesa);
       padding: 0.4rem 1rem;
       border-radius: 100px;
-      margin-bottom: 2rem;
+      margin-bottom: 0.5rem;
       text-transform: uppercase;
     }
     .sn-hero-title {
-      font-size: clamp(4rem, 12vw, 11rem);
+      font-size: clamp(3.5rem, 10vw, 11rem);
       font-weight: 900;
       line-height: 0.92;
       letter-spacing: -0.04em;
-      color: var(--txt-primary);
+      color: #ffffff;
       margin-bottom: 2rem;
     }
     .sn-hero-title .outline {
-      -webkit-text-stroke: 2px var(--txt-primary);
+      -webkit-text-stroke: 2px #ffffff;
       color: transparent;
     }
     .sn-hero-sub {
       font-size: clamp(1rem, 1.8vw, 1.3rem);
-      color: rgba(255,255,255,0.70);
+      color: rgba(255,255,255,0.80);
       max-width: 520px;
       line-height: 1.5;
     }
@@ -106,14 +110,14 @@
       gap: 1.5rem;
     }
     .sn-mv-card {
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid var(--bdr-color-strong);
       border-radius: 14px;
       padding: 2rem;
       transition: border-color 0.3s, background 0.3s;
     }
     .sn-mv-card:hover {
       border-color: var(--clr-turquesa);
-      background: rgba(0,199,199,0.04);
+      background: var(--bg-secondary);
     }
     .sn-mv-card-label {
       font-size: 0.65rem;
@@ -126,7 +130,7 @@
     .sn-mv-card p {
       font-size: 1rem;
       line-height: 1.6;
-      color: rgba(255,255,255,0.75);
+      color: var(--txt-secondary);
     }
 
     /* TIMELINE */
@@ -138,7 +142,7 @@
       position: relative;
       margin-top: 4rem;
       padding-left: 2rem;
-      border-left: 2px solid rgba(255,255,255,0.1);
+      border-left: 2px solid var(--bdr-color-strong);
       list-style: none;
       display: flex;
       flex-direction: column;
@@ -175,7 +179,7 @@
     }
     .sn-tl-desc {
       font-size: 1rem;
-      color: rgba(255,255,255,0.65);
+      color: var(--txt-secondary);
       line-height: 1.6;
       max-width: 560px;
     }
@@ -190,15 +194,15 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
       margin-top: 4rem;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid var(--bdr-color);
     }
     .sn-val-card {
       padding: 3rem 2.5rem;
-      border-right: 1px solid rgba(255,255,255,0.1);
+      border-right: 1px solid var(--bdr-color);
       transition: background 0.4s;
     }
     .sn-val-card:last-child { border-right: none; }
-    .sn-val-card:hover { background: rgba(255,255,255,0.03); }
+    .sn-val-card:hover { background: var(--bg-secondary); }
     .sn-val-num {
       display: block;
       font-size: 0.65rem;
@@ -217,17 +221,26 @@
     .sn-val-desc {
       font-size: 0.95rem;
       line-height: 1.65;
-      color: rgba(255,255,255,0.65);
+      color: var(--txt-secondary);
     }
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .sn-mv-grid { grid-template-columns: 1fr; }
       .sn-values-grid { grid-template-columns: 1fr; }
-      .sn-val-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .sn-val-card { border-right: none; border-bottom: 1px solid var(--bdr-color); }
+      .sn-mv-statement { font-size: clamp(1.8rem, 5vw, 2.5rem); }
     }
     @media (max-width: 600px) {
-      .sn-hero-title { font-size: clamp(3rem, 14vw, 6rem); }
+      .sn-hero { min-height: 85vh; padding-bottom: 3rem; justify-content: center; }
+      .sn-hero-title { font-size: clamp(2.8rem, 13vw, 4rem); margin-bottom: 1rem; letter-spacing: -0.03em; }
+      .sn-mv-statement { font-size: 1.8rem; }
+      .sn-timeline-list { padding-left: 1.25rem; gap: 2.5rem; }
+      .sn-tl-item::before { left: -1.9rem; width: 10px; height: 10px; }
+      .sn-tl-title { font-size: 1.5rem; }
+      .sn-mv-card { padding: 1.5rem; }
+      .sn-val-card { padding: 2rem 1.5rem; }
+      .sn-val-title { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -248,7 +261,7 @@
 ══════════════════════════════════════════════════════════════ -->
 <header class="header" id="header">
   <div class="container header-inner">
-    <a href="index.html" class="logo-link" aria-label="KAUAI Inicio">
+    <a href="/" class="logo-link" aria-label="KAUAI Inicio">
       <img
         src="Imagenes_pagina_inicio/KAUAI LOGO.png"
         alt="KAUAI Medios & Communications"
@@ -257,7 +270,7 @@
     </a>
 
     <div class="header-right">
-      <a href="mailto:info@stotage.com" class="header-contact hide-mobile">INFO@STOTAGE.COM</a>
+      <a href="mailto:info@kauai.com" class="header-contact hide-mobile">INFO@KAUAI.COM</a>
 
       <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema de color">
         <span class="theme-icon-dark">☾</span>
@@ -284,10 +297,10 @@
     <div class="menu-grid">
 
       <ul class="menu-links" role="list">
-        <li><a href="index.html"           class="menu-link">INICIO</a></li>
-        <li><a href="sobre-nosotros.html"  class="menu-link" style="color:var(--clr-turquesa)">SOBRE NOSOTROS</a></li>
-        <li><a href="servicios.html"       class="menu-link">SERVICIOS</a></li>
-        <li><a href="contacto.html"        class="menu-link">CONTACTO</a></li>
+        <li><a href="/"           class="menu-link">INICIO</a></li>
+        <li><a href="/sobre-nosotros"  class="menu-link" style="color:var(--clr-turquesa)">SOBRE NOSOTROS</a></li>
+        <li><a href="/servicios"       class="menu-link">SERVICIOS</a></li>
+        <li><a href="/contacto"        class="menu-link">CONTACTO</a></li>
       </ul>
 
       <div class="menu-sidebar">
@@ -297,7 +310,7 @@
 
         <div class="menu-info">
           <p class="menu-label">CONTÁCTANOS</p>
-          <a href="mailto:info@stotage.com" class="menu-email">info@stotage.com</a>
+          <a href="mailto:info@kauai.com" class="menu-email">info@kauai.com</a>
           <p class="menu-phone">(809) 487 4714</p>
         </div>
         <div class="menu-info">
@@ -338,7 +351,7 @@
     </section>
 
     <!-- §2 MISIÓN + VISIÓN -->
-    <section class="sn-mv gsap-section" id="mision">
+    <section class="sn-mv gsap-section" id="mision" style="background-color: var(--bg-secondary);">
       <div class="container">
         <div class="sn-mv-grid">
 
@@ -367,7 +380,7 @@
     </section>
 
     <!-- §3 TIMELINE -->
-    <section class="sn-timeline gsap-section" id="historia">
+    <section class="sn-timeline gsap-section" id="historia" style="background-color: var(--bg-primary);">
       <div class="container">
         <div class="section-header gsap-fade-up">
           <span class="label-tag">NUESTRA HISTORIA</span>
@@ -405,7 +418,7 @@
     </section>
 
     <!-- §4 VALORES -->
-    <section class="sn-values gsap-section" id="valores">
+    <section class="sn-values gsap-section" id="valores" style="background-color: var(--bg-secondary);">
       <div class="container">
         <div class="section-header gsap-fade-up">
           <span class="label-tag">LO QUE NOS MUEVE</span>
@@ -444,7 +457,7 @@
           </h2>
 
           <div class="magnetic-wrap" id="magneticWrap">
-            <a href="contacto.html" class="btn-magnetic" id="magneticBtn">
+            <a href="/contacto" class="magnetic-btn" id="magneticBtn">
               <span>CONTÁCTANOS</span>
             </a>
           </div>
@@ -463,7 +476,7 @@
           </div>
 
           <div class="footer-copy">
-            <p>©2026 KAUAI. DISEÑO DE VANGUARDIA.</p>
+            <p>©2026 KAUAI MEDIOS. Todos los derechos reservados. <span class="hide-mobile">&nbsp;|&nbsp;</span> Diseño y desarrollo por Vission Solutions.</p>
           </div>
         </div>
 

@@ -34,10 +34,11 @@
   --z-cursor:  9999;
 }
 
-/* DARK THEME (Default) */
+/* DARK THEME */
 html.dark-mode {
   --bg-primary:         var(--clr-fondo-oscuro);
-  --bg-secondary:       #111111;
+  --bg-secondary:       #131313;
+  --bg-alt:             #1a1a1a;
   --txt-primary:        #FFFFFF;
   --txt-secondary:      #A1A1AA;
   --txt-tertiary:       #71717A;
@@ -45,10 +46,11 @@ html.dark-mode {
   --bdr-color-strong:   rgba(255,255,255,0.3);
 }
 
-/* LIGHT THEME */
+/* LIGHT THEME (Default) */
 html.light-mode {
   --bg-primary:         #FAFAFA;
   --bg-secondary:       #F0F0F0;
+  --bg-alt:             #E8E8E8;
   --txt-primary:        #050505;
   --txt-secondary:      #52525B;
   --txt-tertiary:       #A1A1AA;
@@ -317,7 +319,7 @@ html.light-mode .theme-icon-light { transform: translateY(0); opacity: 1; }
   transition: color 0.3s, padding-left 0.3s;
 }
 .menu-link:hover {
-  color: var(--clr-primary);
+  color: var(--clr-turquesa);
   padding-left: 2rem;
 }
 
@@ -346,7 +348,7 @@ html.light-mode .theme-icon-light { transform: translateY(0); opacity: 1; }
 }
 .menu-socials { display: flex; flex-direction: column; gap: 0.5rem; }
 .menu-socials a { font-weight: 600; font-size: 1.1rem; transition: color 0.3s; }
-.menu-socials a:hover { color: var(--clr-primary); }
+.menu-socials a:hover { color: var(--clr-turquesa); }
 
 @media (max-width: 768px) {
   .menu-grid { grid-template-columns: 1fr; align-items: start; padding-top: 10vh; }
@@ -535,7 +537,7 @@ html.light-mode .theme-icon-light { transform: translateY(0); opacity: 1; }
 /* ----------------------------------------------------------------
    §3 ABOUT (Balanced Layout)
    ---------------------------------------------------------------- */
-.section-about { padding: var(--pad-y-section) 0; }
+.section-about { padding: var(--pad-y-section) 0; background-color: var(--bg-secondary); }
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -577,7 +579,7 @@ html.light-mode .theme-icon-light { transform: translateY(0); opacity: 1; }
 /* ----------------------------------------------------------------
    §4 EXPERTISE (Hover Reveal Lists)
    ---------------------------------------------------------------- */
-.section-expertise { padding: var(--pad-y-section) 0; }
+.section-expertise { padding: var(--pad-y-section) 0; background-color: var(--bg-primary); }
 .section-header { margin-bottom: 5vw; }
 .section-title {
   font-size: clamp(2.5rem, 5vw, 4.5rem);
@@ -605,8 +607,8 @@ html.light-mode .theme-icon-light { transform: translateY(0); opacity: 1; }
 .hli-desc { font-size: clamp(1rem, 1.1vw, 1.25rem); color: var(--txt-secondary); line-height: 1.4; }
 .hli-icon { font-size: 2rem; transition: transform 0.3s; }
 
-.huge-list-item:hover .hli-icon { transform: rotate(45deg); color: var(--clr-primary); }
-.huge-list-item:hover .hli-title { color: var(--clr-primary); }
+.huge-list-item:hover .hli-icon { transform: rotate(45deg); color: var(--clr-turquesa); }
+.huge-list-item:hover .hli-title { color: var(--clr-turquesa); }
 .huge-list-item:hover { transform: translateX(10px); }
 
 @media (max-width: 768px) {
@@ -614,32 +616,31 @@ html.light-mode .theme-icon-light { transform: translateY(0); opacity: 1; }
   .hli-icon { display: none; }
 }
 
-/* Hover VIDEO Reveal Container — tamaño reducido, posición corregida */
+/* Hover VIDEO Reveal — Rectángulo estilizado sobre el cursor */
 .hover-reveal-container {
   position: fixed;
   top: 0; left: 0;
-  /* Reducido de 460px a 300px para que no tape el contenido */
-  width: 300px;
+  width: 360px;
   aspect-ratio: 16 / 9;
   pointer-events: none;
   z-index: var(--z-hover);
   opacity: 0;
-  /* transform corregido: -50% X, -65% Y para que quede más centrado al cursor
-     y no tan por debajo */
-  transform: translate(-50%, -65%) scale(0.85) rotate(-2deg);
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  border-radius: 12px;
+  /* Posicionado arriba del cursor, ligeramente rotado al aparecer */
+  transform: translate(-50%, -70%) scale(0.82) rotate(-2deg);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.18);
 }
 .hover-reveal-container.active {
   opacity: 1;
-  transform: translate(-50%, -65%) scale(1) rotate(0deg);
+  transform: translate(-50%, -70%) scale(1) rotate(0deg);
 }
 .hover-reveal-inner {
   width: 100%; height: 100%;
+  overflow: hidden;
   background-color: var(--clr-morado);
 }
 .hover-reveal-video {
@@ -652,7 +653,7 @@ html.light-mode .theme-icon-light { transform: translateY(0); opacity: 1; }
 /* ----------------------------------------------------------------
    §5 BUSINESS MODEL (Balanced Layout)
    ---------------------------------------------------------------- */
-.section-business { padding: var(--pad-y-section) 0; }
+.section-business { padding: var(--pad-y-section) 0; background-color: var(--bg-secondary); }
 .business-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -729,8 +730,39 @@ html.light-mode .theme-icon-light { transform: translateY(0); opacity: 1; }
 .quote-author .author-role { font-size: 0.9rem; color: var(--txt-secondary); opacity: 0.8; }
 
 html.light-mode .section-testimonials {
-  background-color: var(--bg-secondary);
-  color: var(--txt-primary);
+  background-color: #1a1a2e;
+  color: #ffffff;
+}
+html.light-mode .section-testimonials .testi-header .label-tag {
+  border-color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.8);
+}
+
+/* ── TESTIMONIALS MÓVIL: layout vertical ── */
+@media (max-width: 767px) {
+  .testi-pin-container {
+    height: auto;
+    padding: 4rem 0;
+  }
+  .testi-track {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 0;
+    gap: 0;
+    transform: none !important; /* cancela cualquier GSAP */
+  }
+  .testi-panel {
+    width: 100%;
+    max-width: 100%;
+    padding: 3rem 5vw;
+    border-bottom: 1px solid rgba(128,128,128,0.2);
+  }
+  .testi-panel:last-child { border-bottom: none; }
+  .giant-quote {
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+    margin-bottom: 1.5rem;
+  }
 }
 
 /* ----------------------------------------------------------------
@@ -791,20 +823,35 @@ html.light-mode .section-testimonials {
   flex-direction: column;
   align-items: center;
 }
-.giant-cta {
+.giant-cta,
+.footer-headline {
   font-size: clamp(4rem, 10vw, 9rem);
   font-weight: 900;
-  line-height: 0.8;
+  line-height: 0.85;
   letter-spacing: -0.05em;
   margin-bottom: 4rem;
   text-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  color: #FFFFFF;
+}
+.footer-headline-outline {
+  -webkit-text-stroke: 3px rgba(255,255,255,0.7);
+  color: transparent;
+}
+.footer-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
 }
 
-/* Magnetic Button Wrapper */
+/* Magnetic Button Wrapper — Shared across all pages */
 .magnetic-wrap {
   display: inline-block;
-  padding: 2rem; /* Give it space to move */
+  padding: 2rem;
 }
+/* .magnetic-btn = circular (index.html) */
 .magnetic-btn {
   display: flex;
   align-items: center;
@@ -812,7 +859,7 @@ html.light-mode .section-testimonials {
   width: clamp(150px, 15vw, 220px);
   height: clamp(150px, 15vw, 220px);
   background-color: #FFFFFF;
-  color: var(--clr-primary);
+  color: var(--clr-azul);
   border-radius: 50%;
   font-weight: 800;
   font-size: clamp(0.85rem, 1vw, 1.1rem);
@@ -823,10 +870,34 @@ html.light-mode .section-testimonials {
   cursor: pointer;
 }
 .magnetic-btn span {
-  pointer-events: none; /* Let the wrapper handle interactions */
+  pointer-events: none;
   transition: transform 0.1s ease;
 }
-.magnetic-btn:hover {
+.magnetic-btn:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+/* .btn-magnetic = pill shape (sub-pages) */
+.btn-magnetic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  color: var(--clr-azul);
+  border-radius: 100px;
+  font-weight: 800;
+  font-size: clamp(0.9rem, 1.1vw, 1.15rem);
+  letter-spacing: 0.08em;
+  padding: 1.1rem 3rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transition: transform 0.1s ease, box-shadow 0.3s, background 0.3s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-magnetic span {
+  pointer-events: none;
+  transition: transform 0.1s ease;
+}
+.btn-magnetic:hover {
+  background-color: var(--clr-turquesa);
+  color: #FFFFFF;
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
@@ -1071,3 +1142,299 @@ html.light-mode .section-testimonials {
   body  { cursor: auto; }
   .custom-cursor { display: none; }
 }
+
+/* ================================================================
+   GLOBAL MOBILE RESPONSIVE — Aplica a TODAS las páginas
+   Breakpoints: 768px (tablet), 480px (phone)
+   ================================================================ */
+
+/* ────────────────────────────────────────────────
+   HEADER MÓVIL
+──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root { --header-height: 72px; }
+  .header-logo-img { height: 40px; }
+  .header-right { gap: 1.2rem; }
+  .hide-mobile { display: none; }
+}
+@media (max-width: 480px) {
+  :root { --header-height: 64px; }
+  .header-logo-img { height: 34px; }
+  .menu-btn-text { display: none; }
+  .header-right { gap: 0.8rem; }
+}
+
+/* ────────────────────────────────────────────────
+   HERO PRINCIPAL (index.html)
+──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section-hero {
+    min-height: 88vh;
+    padding: 2vh 0 4vh;
+    justify-content: center;
+  }
+  .hero-title {
+    font-size: clamp(1.8rem, 8vw, 3.5rem) !important;
+    line-height: 1 !important;
+    margin-bottom: 3vh !important;
+    word-break: break-word;
+  }
+  .hero-bottom-meta {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .hero-meta-text { font-size: 1rem; }
+  .hero-desc { font-size: 0.9rem; max-width: 100%; }
+}
+
+/* ────────────────────────────────────────────────
+   VIDEO EXPANSIVO (index.html)
+──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section-expanding-video {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  .expanding-video-wrap {
+    width: 92vw;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+}
+
+/* ────────────────────────────────────────────────
+   MARQUEE
+──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section-marquee { margin: 4vw 0; }
+  .marquee-track { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+}
+
+/* ────────────────────────────────────────────────
+   ABOUT SECTION
+──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .huge-text { font-size: clamp(2rem, 7vw, 2.8rem); }
+  .stats-row { flex-wrap: wrap; gap: 1.5rem 3rem; }
+  .stat-num { font-size: clamp(2rem, 8vw, 2.8rem); }
+}
+
+/* ────────────────────────────────────────────────
+   HUGE LIST (servicios en index)
+──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hli-content {
+    grid-template-columns: 1fr !important;
+    gap: 0.6rem;
+  }
+  .hli-icon { display: none; }
+  .hli-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+  .hli-desc { font-size: 0.88rem; }
+  .huge-list-item { padding: 1.5rem 0; }
+  .huge-list-item:hover { transform: none; }
+}
+
+/* ────────────────────────────────────────────────
+   BUSINESS MODEL SECTION
+──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .business-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .sticky-title { font-size: clamp(2rem, 8vw, 2.8rem); margin-bottom: 1rem; }
+  .b-list { gap: 0; }
+  .b-list-item { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+  .b-list-item h3 { font-size: clamp(1.1rem, 5vw, 1.4rem); }
+}
+
+/* ────────────────────────────────────────────────
+   SECTION PILLARS (Lo que nos define)
+──────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .pillars-grid { grid-template-columns: repeat(2, 1fr); height: auto; }
+  .pillar { min-height: 55vw; }
+}
+@media (max-width: 480px) {
+  .pillars-grid { grid-template-columns: 1fr; }
+  .pillar { min-height: 72vw; }
+  .pillar-name { font-size: 1.3rem; }
+  .pillar-desc { font-size: 0.82rem; }
+}
+
+/* ────────────────────────────────────────────────
+   FOOTER CTA
+──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .footer-cta { margin-bottom: 6vw; }
+  .footer-headline { font-size: clamp(2.5rem, 9vw, 3.5rem) !important; line-height: 1 !important; }
+  .section-footer { padding-top: 5rem; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .footer-links { gap: 1rem; flex-wrap: wrap; font-size: 0.8rem; }
+}
+@media (max-width: 480px) {
+  .footer-headline { font-size: clamp(2rem, 11vw, 3rem) !important; }
+  .btn-magnetic {
+    font-size: 0.75rem !important;
+    padding: 0.9rem 2.2rem !important;
+    border-radius: 8px !important;
+  }
+}
+
+/* ────────────────────────────────────────────────
+   MENU OVERLAY MÓVIL
+──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .menu-grid { grid-template-columns: 1fr; align-items: start; padding-top: 10vh; }
+  .menu-sidebar { border-left: none; padding-left: 0; border-top: 1px solid var(--bdr-color); padding-top: 2rem; margin-top: 1rem; flex-direction: row; flex-wrap: wrap; gap: 2rem; justify-content: space-between; }
+  .menu-link { font-size: clamp(1.6rem, 7vw, 2.4rem); padding: 1.2rem 0; }
+}
+@media (max-width: 480px) {
+  .menu-sidebar { display: none; }
+  .menu-link { font-size: clamp(1.5rem, 8vw, 2rem); padding: 1rem 0; }
+}
+
+/* ────────────────────────────────────────────────
+   CURSOR: ocultar en táctil
+──────────────────────────────────────────────── */
+@media (pointer: coarse) {
+  body { cursor: auto; }
+  .custom-cursor { display: none; }
+  .hover-reveal-container { display: none !important; }
+}
+
+/* ================================================================
+   LIGHT MODE — OVERRIDES ESPECÍFICOS
+   Garantiza visibilidad total en modo claro
+   ================================================================ */
+
+/* Stats con gradiente — visible en ambos modos */
+html.light-mode .sv-stat-num,
+html.light-mode .stat-num {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: var(--clr-turquesa);
+}
+
+/* Formulario de contacto en modo claro */
+html.light-mode .form-group input,
+html.light-mode .form-group select,
+html.light-mode .form-group textarea {
+  background: #FFFFFF;
+  border-color: rgba(0,0,0,0.18);
+  color: #050505;
+}
+html.light-mode .form-group input::placeholder,
+html.light-mode .form-group textarea::placeholder {
+  color: #A1A1AA;
+}
+html.light-mode .form-group input:focus,
+html.light-mode .form-group select:focus,
+html.light-mode .form-group textarea:focus {
+  border-color: var(--clr-azul);
+  background: rgba(0,119,238,0.03);
+}
+
+/* Quote block en claro */
+html.light-mode .ct-quote {
+  background: #FFFFFF;
+  border-left-color: var(--clr-azul);
+  color: #050505;
+}
+
+/* Sobre nosotros: borde del timeline visible en claro */
+html.light-mode .sn-timeline-list {
+  border-left-color: rgba(0,0,0,0.2);
+}
+
+/* Valores grid en claro */
+html.light-mode .sn-values-grid {
+  border-color: rgba(0,0,0,0.1);
+}
+html.light-mode .sn-val-card,
+html.light-mode .sn-mv-card {
+  border-color: rgba(0,0,0,0.12);
+}
+html.light-mode .sn-val-card:hover,
+html.light-mode .sn-mv-card:hover {
+  background: #FFFFFF;
+  border-color: var(--clr-azul);
+}
+
+/* Proceso (servicios) en claro */
+html.light-mode .sv-steps-grid,
+html.light-mode .sv-step {
+  border-color: rgba(0,0,0,0.1);
+}
+html.light-mode .sv-step:hover { background: #FFFFFF; }
+
+/* Stats de servicios en claro */
+html.light-mode .sv-stat-item {
+  border-color: rgba(0,0,0,0.1);
+}
+html.light-mode .sv-stats {
+  background: linear-gradient(135deg,
+    rgba(0,119,238,0.06) 0%,
+    rgba(0,199,199,0.05) 50%,
+    rgba(85,0,170,0.04) 100%
+  );
+}
+
+/* Lista de servicios en claro */
+html.light-mode .sv-list-item:hover { background: #FFFFFF; }
+html.light-mode .sv-list-item {
+  border-color: rgba(0,0,0,0.1);
+}
+html.light-mode .sv-huge-list { border-color: rgba(0,0,0,0.1); }
+
+/* Business section en claro */
+html.light-mode .b-list-item { border-color: rgba(0,0,0,0.1); }
+html.light-mode .stats-row { border-color: rgba(0,0,0,0.1); }
+
+/* About section label-tag en claro */
+html.light-mode .section-about .label-tag,
+html.light-mode .sn-mv .label-tag,
+html.light-mode .sn-timeline .label-tag,
+html.light-mode .sn-values .label-tag,
+html.light-mode .sv-list-section .label-tag,
+html.light-mode .sv-process .label-tag,
+html.light-mode .section-expertise .label-tag,
+html.light-mode .section-business .label-tag {
+  border-color: rgba(0,0,0,0.2);
+  color: var(--txt-secondary);
+}
+
+/* Huge list items en claro */
+html.light-mode .huge-list { border-color: rgba(0,0,0,0.1); }
+html.light-mode .huge-list-item { border-color: rgba(0,0,0,0.1); }
+
+/* Pilares — no cambia (siempre oscuro con video) */
+
+/* Header en claro — borde más sutil */
+html.light-mode .header { border-bottom-color: rgba(0,0,0,0.08); }
+
+/* Menu overlay en modo claro */
+html.light-mode .menu-links li { border-color: rgba(0,0,0,0.08); }
+html.light-mode .menu-links { border-color: rgba(0,0,0,0.08); }
+html.light-mode .menu-sidebar { border-color: rgba(0,0,0,0.08); }
+
+/* Expandig video sombra suave en claro */
+html.light-mode .expanding-video-wrap {
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+}
+
+/* ================================================================
+   PERFORMANCE — will-change controlado
+   ================================================================ */
+.expanding-video-wrap,
+.pillar-face,
+.pillar-bg video,
+.hover-reveal-container,
+.custom-cursor {
+  will-change: transform;
+}
+/* Eliminar will-change cuando no hay interacción */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .expanding-video-wrap, .pillar-face, .hover-reveal-container { will-change: auto; }
+}
+

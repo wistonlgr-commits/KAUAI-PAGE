@@ -35,13 +35,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('themeToggle');
   const htmlElement = document.documentElement;
 
-  // Check LocalStorage or OS preference
+  // Default: light mode — only override if user explicitly chose dark
   const savedTheme = localStorage.getItem('theme');
-  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   
-  if (savedTheme === 'light' || (!savedTheme && !systemPrefersDark)) {
-    htmlElement.classList.replace('dark-mode', 'light-mode');
+  if (savedTheme === 'dark') {
+    // User explicitly switched to dark — respect it
+    htmlElement.classList.replace('light-mode', 'dark-mode');
+    htmlElement.setAttribute('data-theme', 'dark');
+  } else {
+    // Default: always light (new visitors or saved 'light')
+    htmlElement.classList.remove('dark-mode');
+    htmlElement.classList.add('light-mode');
     htmlElement.setAttribute('data-theme', 'light');
+    if (!savedTheme) localStorage.setItem('theme', 'light');
   }
 
   themeToggle.addEventListener('click', () => {
@@ -141,12 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // D. TESTIMONIALS - HORIZONTAL PINNED SCROLL (CRÍTICO)
+  // D. TESTIMONIALS - HORIZONTAL PINNED SCROLL (solo desktop)
   const testiSection = document.getElementById('testimonials');
   const testiTrack = document.getElementById('testiTrack');
   
-  if (testiSection && testiTrack) {
-    // Determine how far to slide. Track width minus viewport width.
+  // Solo activar scroll horizontal en pantallas > 768px
+  if (testiSection && testiTrack && window.matchMedia('(min-width: 768px)').matches) {
     const getScrollAmount = () => -(testiTrack.scrollWidth - window.innerWidth);
     
     gsap.to(testiTrack, {
@@ -154,56 +160,121 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: "none",
       scrollTrigger: {
         trigger: testiSection,
-        start: "top top", // When top of section hits top of viewport
-        end: () => `+=${testiTrack.scrollWidth}`, // Scroll distance equals total width
-        pin: true, // Freeze vertical scroll
-        scrub: 1,  // Smoothly tie horizontal movement to scroll
-        invalidateOnRefresh: true // Recalculate on resize
+        start: "top top",
+        end: () => `+=${testiTrack.scrollWidth}`,
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true
       }
     });
   }
 
 
   // ==========================================================================
-  // 5. HOVER REVEAL — VIDEO solo en zona de contenido (no en padding del li)
+  // 5. HOVER REVEAL — Círculo de video que sigue al cursor
+  //    - Precarga todos los videos de hover al cargar la página
+  //    - El círculo sigue al cursor con GSAP suavizado
+  //    - Cambia de video instantáneamente si ya está precargado
   // ==========================================================================
-  const hoverContainer  = document.getElementById('hoverRevealContainer');
-  const hoverVideo      = document.getElementById('hoverRevealVideo');
-  // CLAVE: el trigger es el div .hli-content, NO el li completo.
-  // Así el video solo aparece cuando el cursor está sobre el texto,
-  // no en las zonas de padding superior/inferior del ítem (zonas rojas).
-  const videoTriggers   = document.querySelectorAll('.video-hover-trigger .hli-content');
+  const hoverContainer = document.getElementById('hoverRevealContainer');
+  const hoverVideo     = document.getElementById('hoverRevealVideo');
+  const videoTriggers  = document.querySelectorAll('.video-hover-trigger');
+
+  // Mapa de videos precargados: src → HTMLVideoElement
+  const preloadedVideos = new Map();
+
+  // Precarga en background después del primer idle
+  const preloadHoverVideos = () => {
+    videoTriggers.forEach(el => {
+      const src = el.getAttribute('data-video') || el.closest('[data-video]')?.getAttribute('data-video');
+      if (src && !preloadedVideos.has(src)) {
+        const vid = document.createElement('video');
+        vid.muted = true;
+        vid.loop  = true;
+        vid.playsInline = true;
+        vid.preload = 'auto';
+        vid.style.display = 'none'; // <-- CLAVE: Ocultar el video físicamente
+        vid.src = src;
+        document.body.appendChild(vid);
+        vid.load();
+        preloadedVideos.set(src, vid);
+      }
+    });
+    // También recoge data-video en li padres
+    document.querySelectorAll('[data-video]').forEach(el => {
+      const src = el.getAttribute('data-video');
+      if (src && !preloadedVideos.has(src)) {
+        const vid = document.createElement('video');
+        vid.muted = true;
+        vid.loop  = true;
+        vid.playsInline = true;
+        vid.preload = 'auto';
+        vid.style.display = 'none'; // <-- CLAVE: Ocultar el video físicamente
+        vid.src = src;
+        document.body.appendChild(vid);
+        vid.load();
+        preloadedVideos.set(src, vid);
+      }
+    });
+  };
+
+  // Inicia precarga tras 1.5s para no bloquear el primer render
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => preloadHoverVideos(), { timeout: 1500 });
+  } else {
+    setTimeout(preloadHoverVideos, 1500);
+  }
 
   if (hoverContainer && hoverVideo && window.matchMedia('(pointer: fine)').matches) {
 
-    // El contenedor sigue al ratón con GSAP suavizado
+    // Seguimiento del rectángulo al cursor — aparece arriba del mouse
     window.addEventListener('mousemove', (e) => {
       gsap.to(hoverContainer, {
         x: e.clientX,
         y: e.clientY,
-        duration: 0.55,
-        ease: 'power3.out'
+        duration: 0.45,
+        ease: 'power2.out'
       });
-    });
+    }, { passive: true });
 
-    videoTriggers.forEach(contentEl => {
-      // Sube al li padre para leer el atributo data-video
-      const videoSrc = contentEl.closest('.video-hover-trigger').getAttribute('data-video');
+    // Trigger en el área de texto (hli-content) y también en li con data-video
+    const contentTriggers = document.querySelectorAll('.video-hover-trigger .hli-content, .video-hover-trigger');
 
-      contentEl.addEventListener('mouseenter', () => {
-        if (hoverVideo.getAttribute('src') !== videoSrc) {
-          hoverVideo.src = videoSrc;
+    contentTriggers.forEach(el => {
+      // Obtener src desde el elemento o su ancestro
+      const getVideoSrc = () =>
+        el.getAttribute('data-video') ||
+        el.closest('[data-video]')?.getAttribute('data-video');
+
+      el.addEventListener('mouseenter', () => {
+        const src = getVideoSrc();
+        if (!src) return;
+
+        const preloaded = preloadedVideos.get(src);
+
+        if (preloaded && preloaded.readyState >= 3) {
+          // Video listo: cambio instantáneo sin rebuffering
+          hoverVideo.src = src;
+          hoverVideo.currentTime = preloaded.currentTime;
+          hoverVideo.play().catch(() => {});
+        } else if (hoverVideo.getAttribute('src') !== src) {
+          // No precargado todavía: cargar normalmente
+          hoverVideo.src = src;
           hoverVideo.load();
           hoverVideo.play().catch(() => {});
         }
+
         hoverContainer.classList.add('active');
-        hoverContainer.setAttribute('aria-hidden', 'false');
       });
 
-      contentEl.addEventListener('mouseleave', () => {
+      el.addEventListener('mouseleave', () => {
         hoverContainer.classList.remove('active');
-        hoverContainer.setAttribute('aria-hidden', 'true');
       });
+    });
+
+    // Ocultar al hacer scroll
+    lenis.on('scroll', () => {
+      hoverContainer.classList.remove('active');
     });
   }
 
